@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大屏幕生成系统</title>
+
+
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/main.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="./js/jquery-1.6.2.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<!--<script src="./js/bootstrap.min.js"></script>-->
+	<script src="./js/jquery.contextmenu.r2.js"></script>
+	<script src="./js/main.js"></script>
+	<script>
+	$(document).ready(function(){
+		loadSession();
+		// generatorSketch();
+	});
+	</script>
+
+	<div class="navbar-fixed-top titlebar" >
+		<div class="tilteleft">
+				<label class=" titlefont">大屏幕生成系统</label>
+					<input type="text" id="rows" placeholder="行" value="4" style="width: 60px;" hidden />
+					<input type="text" id="cols" placeholder="列"  value="4" style="width:60px;" hidden />
+					<!--<button id="btnGenerator" class="btn btn-success" onclick="generatorSketch();" >生成框架</button>-->
+					<button id="btnSave" class="btn btn-success" onclick="saveSketch();" > 保存</button>
+					<button id="btnLoad" class="btn btn-success" onclick="loadSession();"> 载入</button>
+					<!--<span id="btnPreview" class="btn btn-success" > 预览</span>-->
+		</div>
+	</div>
+	
+
+	<div id="workspace" >
+		workspace
+	</div>
+
+    <!--右键菜单-->
+     <div class="contextMenu" id="myMenu" hidden >
+      <ul>
+        <li id="btnClearCell">清空</li>
+        <li id="btnEditCell"> 编辑 </li>
+      </ul>
+    </div>
+
+</body>
+</html>
