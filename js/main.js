@@ -6,6 +6,9 @@ if (!window.console.log) window.console.log = function () { };
 var _sessionFolder = "_session/";
 var _rootPath = getAbsolutePath().replace("file:///", "") + _sessionFolder;
 
+var rootCellHeight ;
+var rootCellWidth;
+
 /** *Write text file*/
 function WriteTextFile(filename, text) {
     var FSO = new ActiveXObject("Scripting.FileSystemObject");
@@ -41,7 +44,6 @@ function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
 
-
 /***	 生成外层大框架表格 */
 function generatorSketch() 
 {
@@ -49,15 +51,60 @@ function generatorSketch()
     var cols = $("#cols").val();
     // console.log(rows);
     // console.log(cols);
+    
+    var screenW = screen.availWidth; //获取屏幕宽度
+    var screenH = screen.availHeight; //获取屏幕高度
+    var tableStyle = "style=\"position: absolute;	width: "+screenW+"px; height: "+screenH+"px; background: #eeeeee; top:100px;\"";
+    
+    var tdWidth  = screenW / cols;
+    var tdHeight = screenH / rows;
+    var style ="\
+    <style>\
+        .sketchTable{\
+            left:0;\
+            position:absolute;\
+            table-layout: fixed;\
+            word-wrap:break-word;\
+            overflow: hidden;\
+            width: " + screenW+ "px;\
+            height: "+ screenH +"px;\
+            background:#eeeeee;\
+            text-overflow: ellipsis;\
+            top:100px;\
+        }\
+        .sketchTd {\
+            min-height: "+tdHeight+"px;\
+            max-height: "+tdHeight+"px;\
+            min-width:  "+tdWidth+"px;\
+            max-width:  "+tdWidth+"px;\
+            table-layout: fixed;\
+            word-wrap:break-word;\
+            overflow: hidden;\
+            border:solid;\
+            border-width:2px;\
+            border-color: white;\
+            background-color: rgb(0,101,153);\
+        }\
+        .sketchTd:hover\
+        {\
+            background-color: #00cc99;\
+        }\
+    </style>\
+    ";
 
-    var html = "<table class='sketch table' border='1' cellspacing='2' cellpadding='2' align='center'>\n"; //class=sketch, main.css定义
+    rootCellWidth = tdWidth;
+    rootCellHeight = tdHeight;
+
+    // var html = "<table  border='0' cellspacing='0' cellpadding='0' align='center'>\n"; //class=sketch, main.css定义
+    var html = style;
+    html  += "<table  class='sketchTable' border='0' cellspacing='0' cellpadding='0' align='center'>\n"; 
     html += "<tbody id='sketch'>\n" 	//约定外框架的tbody的ID为sketch
     for (var i = 0; i < rows; i++) {
         html += "<tr>"
         for (var j = 0; j < cols; j++) {
             var id = i + "x" + j;
-            //<img src='./img/edit.png' onclick='editCell(\"" + id + "\");'>
-            html += "<td class=\"sketchtd\" id=\"" + id + "\" ondblclick='editCell(\"" + id + "\");'>&nbsp;</td>\n"; 
+            // html += "<td class=\"sketchtd\" id=\"" + id + "\" ondblclick='editCell(\"" + id + "\");'>&nbsp;</td>\n"; 
+            html += "<td  class='sketchTd' id=\"" + id + "\" ondblclick='editCell(\"" + id + "\");'>&nbsp;</td>\n"; 
         }
         html += "</tr>\n";
     }
@@ -110,10 +157,21 @@ function editCell(id)
 {
     var w = screen.availWidth;
     var h = screen.availHeight -30;
-    var url = "_tablebuilder.html?id=" + id;
-
+    var url = "_tablebuilder.html?id=" + id + "&tblH="+rootCellHeight+"&tblW="+rootCellWidth;
+    console.log(url);
+    
     mywindow = window.open( url , "_blank","menubar=1,resizable=1,width=" +  (w/5*4) +",height=" + h  );
     mywindow.moveTo( w/5/2,  0);
+}
+
+function preView()
+{
+    var w = screen.availWidth;
+    var h = screen.availHeight -30;
+    var url = "frameset.html";
+    previewW = window.open( url , "_blank","menubar=1,resizable=1,width=" +  w +",height=" + h  );
+    previewW.moveTo( 0,  0);
+    
 }
 
 /*清空单元 */
@@ -143,6 +201,15 @@ function saveTableforCell()
     var filename = _rootPath + rootRw +  "-struct.html";
     console.log("saveTableforCell: " + filename);
     
+    //保存前清除掉表格的背景色
+    var tbody = $("tbody")[0];  
+    for (var i = 0; i < tbody.rows.length; i++) {
+        var row = tbody.rows[i];
+        for (var j = 0; j < row.cells.length; j++) {
+           row.cells[j]. style.backgroundColor = "";
+        }
+    }
+    
     var filecontent = $("#editSet").html();
     WriteTextFile(filename, filecontent);
 }
@@ -150,6 +217,8 @@ function saveTableforCell()
 /***	从文件载入 外框架单元格内的可编辑表格 */
 function loadTableforCell(){
     var rootRw = getRootCellRW(); // in _tablebuilder.html
+    var rtblHeight = getRootCellHeight();
+    var rtblWidth = getRootCellWidth();
     
     var filename = _rootPath + rootRw  +  "-struct.html";   
     console.log( "loadTableforCell:" + filename);
@@ -158,7 +227,7 @@ function loadTableforCell(){
     $("#editSet").html(filecontent);   
 
     initContextMenu("tbody");    
-    RestoreCardBuilder();    
+    RestoreCardBuilder(rtblWidth, rtblHeight);    
 }
 
 
@@ -193,9 +262,12 @@ function tableCreater()
     var cols = $("#cols").val();
     var parent_id = getRootCellRW();  
     
+    var tblWidth = getRootCellWidth();
+    var tblHeight = getRootCellHeight();
+    
     if (rows > 0 && cols > 0)
     {
-        var tbl = CreateCardBuilder(rows,cols, parent_id);	
+        var tbl = CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight);
         
         //clear child nodes first
         var node = document.getElementById("editSet");
@@ -228,7 +300,7 @@ function loadSession()
     }
     
     initContextMenu("td");
-    console.log("L231 ");
+
     var tbody = $("#sketch")[0]; //找到外框架的tbody
     for (var i = 0; i < tbody.rows.length; i++) {
         var row = tbody.rows[i];

@@ -7,7 +7,7 @@
 <title>大屏幕生成系统</title>
 
 
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+<!--<link href="./css/bootstrap.min.css" rel="stylesheet">-->
 <link href="./css/main.css" rel="stylesheet">
 
 </head>
@@ -29,12 +29,12 @@
 	<div class="navbar-fixed-top titlebar" >
 		<div class="tilteleft">
 				<label class=" titlefont">大屏幕生成系统</label>
-					<input type="text" id="rows" placeholder="行" value="4" style="width: 60px;" hidden />
-					<input type="text" id="cols" placeholder="列"  value="4" style="width:60px;" hidden />
+					<input type="text" id="rows" placeholder="行" value="3" style="width: 60px;" hidden />
+					<input type="text" id="cols" placeholder="列"  value="3" style="width:60px;" hidden />
 					<!--<button id="btnGenerator" class="btn btn-success" onclick="generatorSketch();" >生成框架</button>-->
 					<button id="btnSave" class="btn btn-success" onclick="saveSketch();" > 保存</button>
 					<button id="btnLoad" class="btn btn-success" onclick="loadSession();"> 载入</button>
-					<!--<span id="btnPreview" class="btn btn-success" > 预览</span>-->
+					<span id="btnPreview" class="btn btn-success" onclick="preView();" >预览</span>
 		</div>
 	</div>
 	

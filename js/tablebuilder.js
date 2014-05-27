@@ -992,7 +992,7 @@ function CheckCardBreak(breakAt)
 }
 
 
-function CreateCardBuilder(rows,cols, parent_id)
+function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 {
 	var tbl= document.createElement("TABLE");
 	curCardTable = tbl;
@@ -1000,11 +1000,17 @@ function CreateCardBuilder(rows,cols, parent_id)
 	tbl.cellPadding = 0;
 	tbl.nRows = rows;
 	tbl.nCols = cols;
-	tbl.border = 1;
-	tbl.width = "90%";
-	// tbl.className = "table";
-	// tbl.style.tableLayout = "fixed";
-	// tbl.style.marginBottom = '3px';
+	tbl.border = 0;
+	tbl.style.marginTop = "0";
+	tbl.style.tableLayout = "fixed";
+	tbl.style.marginBottom = '0px';
+	tbl.style.wordWrap = "break-word";
+	tbl.style.textOverflow = "ellipsis";
+	tbl.onmouseover = function(){ this.border = 1;};
+	tbl.onmouseout = function(){ this.border=0;};
+	
+	tbl.width =  tblWidth;
+	tbl.height = tblHeight;
 
 	var i,j;
 	var tbody = document.createElement("TBODY");
@@ -1013,38 +1019,24 @@ function CreateCardBuilder(rows,cols, parent_id)
 	
 	tbl.appendChild(tbody);
 
-/*	tr = document.createElement("TR");
-	tbody.appendChild(tr);
-	for (j=0;j<=cols;j++){
-
-		td = document.createElement("TD");
-		tr.appendChild(td);
-		td.innerHTML = "&nbsp;";
-		if (j==0){
-			td.width="1";
-		}else{
-			td.style.borderBottom = cardLineStyle;
-		}
-		
-		// td.style.cursor = "default";
-		// td.style.lineHeight = '0px';
-	}*/
-
 	for (i=0;i<rows;i++){
 		tr = document.createElement("TR");
-		tbody.appendChild(tr);		
-		
-/*		td = document.createElement("TD");
-		td.innerHTML = "&nbsp;";
-		td.style.borderRight = cardLineStyle;
-		// td.style.cursor = "default";
-		tr.appendChild(td);*/
-		
+		tbody.appendChild(tr);	
+
 		for (j=0;j<cols;j++){
 			td = CreateCardCell(i,j);
 			
 			td.id="u"+i+"u"+j;
 			
+			td.style.minHeight=  tblHeight / rows;
+			td.style.maxHeight=  tblHeight / rows;
+			td.style.minWidth= tblWidth / cols;
+			td.style.maxWidth= tblWidth / cols;
+			td.style.tableLlayout= "fixed";
+			td.style.wordWrap="break-word";
+			td.style.textOoverflow= "ellipsis";
+			td.style.overflow= "hidden";
+
 			tr.appendChild(td);
 		}
 	}
@@ -1053,7 +1045,7 @@ function CreateCardBuilder(rows,cols, parent_id)
 }
 
 /*** 对html 里已经存在的表格改造成可合并和拆分的表格 */
-function RestoreCardBuilder()
+function RestoreCardBuilder(tblWidth, tblHeight)
 { 
 	var tbls = document.getElementsByTagName("TABLE"); // 假定只在#editSet 里有一个表格
 	var tbl = tbls[0];
@@ -1076,13 +1068,22 @@ function RestoreCardBuilder()
 		if (cols < c )  cols = c; 
 	}
 
+	tbl.width =  tblWidth;
+	tbl.height = tblHeight;
+	
 	curCardTable = tbl;
 	tbl.cellSpacing = 0;
 	tbl.cellPadding = 0;
-	tbl.border = 1;
-	tbl.width = "90%";
 	tbl.nRows = rows;
 	tbl.nCols = cols;
+	tbl.border = 0;
+	tbl.style.marginTop = "0";
+	tbl.style.tableLayout = "fixed";
+	tbl.style.marginBottom = '0px';
+	tbl.style.wordWrap = "break-word";
+	tbl.style.textOverflow = "ellipsis";
+	tbl.onmouseover = function(){ this.border=1;};
+	tbl.onmouseout = function(){ this.border=0;};
 
 	InitGlobal();	
 }
@@ -1097,139 +1098,4 @@ function PointWithinElement(x,y,elem)
 
 function isDefined(val){
 	return (val!=null && typeof(val)!="undefined");
-}
-
-function JSCellDescriptor(lr,lc,rs,cs,fname,ctype,al,val,req)
-{
-	this.logr = lr;
-	this.logc = lc;
-	this.rowSpan = rs;
-	this.colSpan = cs;
-	this.fieldName = fname;
-	this.itemType = ctype;
-	this.align = al;
-	this.vAlign = val;
-	this.isRequired = req;
-}
-function JSViewDescriptor(nr,nc,brk)
-{
-	this.nRows = nr;
-	this.nCols = nc;
-	this.breakAt = brk;
-	this.rows = new Array();
-}
-//edit PackgeJSON
-function PackageJSON()
-{
-	 
-	 
-	var vobj = new JSViewDescriptor(curCardTable.nRows,curCardTable.nCols,document.frmCard.breakAt.value);
-	var tbody = curCardTable.tBodies[0];
-	for (i=1;i<tbody.rows.length;i++){
-		row = tbody.rows[i];
-		cells = new Array();
-		for (j=0;j<row.cells.length;j++){
-			cell = row.cells[j];
-			if (!IsCardCell(cell))
-				continue;
-			if (IsCardItem(cell.firstChild)){
-				cellobj = new JSCellDescriptor(cell.logr,cell.logc,cell.rowSpan,cell.colSpan,cell.firstChild.fieldName,cell.firstChild.itemType,cell.align,cell.vAlign,(cell.firstChild.itemType=='INPUT' && cell.firstChild.isRequired));
-			}
-			else{
-				cellobj = new JSCellDescriptor(cell.logr,cell.logc,cell.rowSpan,cell.colSpan,null,null,cell.align,cell.vAlign,false);
-			}
-			cells[cells.length] = cellobj;
-		}
-		
-		//cells = cells.pop();
-	/* 	var clone_cells=new Array();
-		 for(i in cells){
-			if(typeof(cells[i]) == 'function'){
-				continue;  
-			}
-			
-			clone_cells[i] = cells[i];
-		}
-		 */
-		
-		 
-		//vobj.rows[vobj.rows.length] = clone_cells;
-		vobj.rows[vobj.rows.length] = cells;
-	}
-	
-	 
-	return vobj;
-}
-
-
-//view PackgeJSON
-function PackageJSON_VIEW()
-{
-	 
-	 
-	var vobj = new JSViewDescriptor(curCardTable.nRows,curCardTable.nCols,document.frmCard_view.breakAt.value);
-	var tbody = curCardTable.tBodies[0];
-	for (i=1;i<tbody.rows.length;i++){
-		row = tbody.rows[i];
-		cells = new Array();
-		for (j=0;j<row.cells.length;j++){
-			cell = row.cells[j];
-			if (!IsCardCell(cell))
-				continue;
-			if (IsCardItem(cell.firstChild)){
-				cellobj = new JSCellDescriptor(cell.logr,cell.logc,cell.rowSpan,cell.colSpan,cell.firstChild.fieldName,cell.firstChild.itemType,cell.align,cell.vAlign,(cell.firstChild.itemType=='INPUT' && cell.firstChild.isRequired));
-			}
-			else{
-				cellobj = new JSCellDescriptor(cell.logr,cell.logc,cell.rowSpan,cell.colSpan,null,null,cell.align,cell.vAlign,false);
-			}
-			cells[cells.length] = cellobj;
-		}
-		
-		//cells = cells.pop();
-	/* 	var clone_cells=new Array();
-		 for(i in cells){
-			if(typeof(cells[i]) == 'function'){
-				continue;  
-			}
-			
-			clone_cells[i] = cells[i];
-		}
-		 */
-		
-		 
-		//vobj.rows[vobj.rows.length] = clone_cells;
-		vobj.rows[vobj.rows.length] = cells;
-	}
-	
-	 
-	return vobj;
-}
-
-  function doSave(value, type, name) {
-    var blob;
-    if (typeof window.Blob == "function") {
-        blob = new Blob([value], {type: type});
-    } else {
-        var BlobBuilder = window.BlobBuilder || window.MozBlobBuilder || window.WebKitBlobBuilder || window.MSBlobBuilder;
-        var bb = new BlobBuilder();
-        bb.append(value);
-        blob = bb.getBlob(type);
-    }
-    var URL = window.URL || window.webkitURL;
-    var bloburl = URL.createObjectURL(blob);
-    var anchor = document.createElement("a");
-    if ('download' in anchor) {
-        anchor.style.visibility = "hidden";
-        anchor.href = bloburl;
-        anchor.download = name;
-        document.body.appendChild(anchor);
-        var evt = document.createEvent("MouseEvents");
-        evt.initEvent("click", true, true);
-        anchor.dispatchEvent(evt);
-        document.body.removeChild(anchor);
-    } else if (navigator.msSaveBlob) {
-        navigator.msSaveBlob(blob, name);
-    } else {
-        location.href = bloburl;
-    }
 }
