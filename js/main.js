@@ -155,8 +155,8 @@ function initContextMenu( bundleTarget)
 /***	打开新窗口编辑各单元 */
 function editCell(id) 
 {
-    var w = screen.availWidth;
-    var h = screen.availHeight -30;
+    var w = screen.availWidth-100;
+    var h = screen.availHeight -60;
     var url = "_tablebuilder.html?id=" + id + "&tblH="+rootCellHeight+"&tblW="+rootCellWidth;
     console.log(url);
     
