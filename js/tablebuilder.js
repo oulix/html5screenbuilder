@@ -1052,7 +1052,7 @@ function RestoreCardBuilder(tblWidth, tblHeight)
 	var rows = 0;
 	var cols = 0; 
 
-	td =tbl.getElementsByTagName('td');
+	var td =tbl.getElementsByTagName('td');
 	for (i = 0; i < td.length; i++) 
 	{
 		var tid = td[i].id; // id = u3u5
