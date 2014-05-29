@@ -1014,9 +1014,9 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 	tbl.nRows = rows;
 	tbl.nCols = cols;
 	tbl.border = 0;
-	// tbl.style.marginTop = "0";
+	tbl.style.marginTop = "0";
 	tbl.style.tableLayout = "fixed";
-	// tbl.style.marginBottom = '0px';
+	tbl.style.marginBottom = '0px';
 	tbl.style.wordWrap = "break-word";
 	tbl.style.textOverflow = "ellipsis";
 	// tbl.onmouseover = function(){ this.border = 1;};
@@ -1092,10 +1092,10 @@ function RestoreCardBuilder(tblWidth, tblHeight)
 	tbl.nRows = rows;
 	tbl.nCols = cols;
 	tbl.border = 0;
-	// tbl.style.marginTop = "0";
+	tbl.style.marginTop = "0";
 	tbl.style.tableLayout = "fixed";
 	// tbl.style.marginBottom = '0px';
-	tbl.style.wordWrap = "break-word";
+	// tbl.style.wordWrap = "break-word";
 	tbl.style.textOverflow = "ellipsis";
 	// tbl.onmouseover = function(){ this.border=1;};
 	// tbl.onmouseout = function(){ this.border=0;};

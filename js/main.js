@@ -263,6 +263,7 @@ function fillContentToTD()
     var rw = parent.getSelCellRowCol();
     var child_id = "u"+rw.replace("x", "u");        
     var filecontent = UE.getEditor('editor').getContent();  
+    filecontent = "<div style='width:100%; height:100%; overflow:hidden; margin:10px; padding: 5px;'>" + filecontent + "</div>";
     parent.$("#"+child_id).html(filecontent);
 }
 
