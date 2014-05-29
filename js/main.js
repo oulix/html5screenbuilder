@@ -49,12 +49,12 @@ function generatorSketch()
 {
     var rows = $("#rows").val();
     var cols = $("#cols").val();
-    // console.log(rows);
-    // console.log(cols);
+    console.log(rows);
+    console.log(cols);
     
     var screenW = screen.availWidth; //获取屏幕宽度
     var screenH = screen.availHeight; //获取屏幕高度
-    var tableStyle = "style=\"position: absolute;	width: "+screenW+"px; height: "+screenH+"px; background: #eeeeee; top:100px;\"";
+    var tableStyle = "style=\"position: absolute;	width: "+screenW+"px; height: "+screenH+"px; background: #eeeeee;\"";
     
     var tdWidth  = screenW / cols;
     var tdHeight = screenH / rows;
@@ -66,11 +66,10 @@ function generatorSketch()
             table-layout: fixed;\
             word-wrap:break-word;\
             overflow: hidden;\
-            width: " + screenW+ "px;\
-            height: "+ screenH +"px;\
+            width: 100%;\
+            height: 100%;\
             background:#eeeeee;\
             text-overflow: ellipsis;\
-            top:100px;\
         }\
         .sketchTd {\
             min-height: "+tdHeight+"px;\
@@ -133,6 +132,18 @@ function initContextMenu( bundleTarget)
                     console.log('Trigger element id '+el.id+'\t 编辑');
                     editCell(el.id);
 				},
+                'btnSaveSketch': function(el) {
+                    console.log('Trigger element id '+el.id+'\t 保存到文件');
+                   saveSketch();
+				},
+                'btnLoadSketch': function(el) {
+                    console.log('Trigger element id '+el.id+'\t 从文件载入');
+                   loadSession();
+				},
+                'btnPreview': function(el) {
+                    console.log('Trigger element id '+el.id+'\t 用frameset预览');
+                    preView();
+				},
                 
                 //_tablebuilder.html
                 'btnMerge': function(el) {
@@ -169,7 +180,7 @@ function preView()
     var w = screen.availWidth;
     var h = screen.availHeight -30;
     var url = "frameset.html";
-    previewW = window.open( url , "_blank","menubar=1,resizable=1,width=" +  w +",height=" + h  );
+    previewW = window.open( url , "_self","menubar=1,resizable=1,width=" +  w +",height=" + h  );
     previewW.moveTo( 0,  0);
     
 }

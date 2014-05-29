@@ -26,18 +26,16 @@
 	});
 	</script>
 
-	<div class="navbar-fixed-top titlebar" >
+<!--	<div class="navbar-fixed-top titlebar" >
 		<div class="tilteleft">
-				<label class=" titlefont">大屏幕生成系统</label>
-					<input type="text" id="rows" placeholder="行" value="3" style="width: 60px;" hidden />
-					<input type="text" id="cols" placeholder="列"  value="3" style="width:60px;" hidden />
-					<!--<button id="btnGenerator" class="btn btn-success" onclick="generatorSketch();" >生成框架</button>-->
+				<label class=" titlefont">大屏幕生成系统</label>					
 					<button id="btnSave" class="btn btn-success" onclick="saveSketch();" > 保存</button>
 					<button id="btnLoad" class="btn btn-success" onclick="loadSession();"> 载入</button>
 					<span id="btnPreview" class="btn btn-success" onclick="preView();" >预览</span>
 		</div>
-	</div>
-	
+	</div>-->
+	<input type="text" id="rows" placeholder="行" value="3" style="display:none; width: 60px;"  />
+	<input type="text" id="cols" placeholder="列"  value="3" style="display:none; width:60px;"  />
 
 	<div id="workspace" >
 		workspace
@@ -46,8 +44,11 @@
     <!--右键菜单-->
      <div class="contextMenu" id="myMenu" hidden >
       <ul>
-        <li id="btnClearCell">清空</li>
-        <li id="btnEditCell"> 编辑 </li>
+		<li id="btnSaveSketch"> 保存到文件 </li>
+        <li id="btnLoadSketch"> 从文件载入 </li>
+        <li id="btnPreview"> 预览 </li>
+        <li id="btnClearCell">清空单元</li>
+        <li id="btnEditCell"> 编辑单元</li>
       </ul>
     </div>
 
