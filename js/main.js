@@ -149,6 +149,7 @@ function initContextMenu( bundleTarget)
                 'btnMerge': function(el) {
                     console.log('Trigger element id '+el.id+'\t 合并'); 
                     MergeCellSelection();
+                    ResizeTable();
 				},
 				'btnSplit': function(el) {
                     console.log('Trigger element id '+el.id+'\t 拆分');
@@ -263,9 +264,58 @@ function fillContentToTD()
     var rw = parent.getSelCellRowCol();
     var child_id = "u"+rw.replace("x", "u");        
     var filecontent = UE.getEditor('editor').getContent();  
-    filecontent = "<div style='width:100%; height:100%; overflow:hidden; margin:10px; padding: 5px;'>" + filecontent + "</div>";
-    parent.$("#"+child_id).html(filecontent);
+    
+    var div = parent.$("#"+child_id).children("DIV")[0];
+    div.innerHTML = filecontent;
 }
+
+function ResizeTable()
+{
+	console.log("ResizeTable:");
+	var tbls = document.getElementsByTagName("TABLE"); // 假定只在#editSet 里有一个表格
+	var tbl = tbls[0];
+	var rows = 0;
+	var cols = 0; 
+
+	var tds =tbl.getElementsByTagName('td');
+	for (i = 0; i < tds.length; i++) 
+	{
+		var tid = tds[i].id; // id = u3u5
+		var arrRC =tid.split("u");  // arrRC = ["0", "3","5"]
+		var r = parseInt( arrRC[1] ) ;
+		var c = parseInt( arrRC[2] ) ;
+
+		//得到表格的真实行列数
+		if (rows < r)  rows = r;  
+		if (cols < c )  cols = c; 
+	}
+	
+    var borderWidth  = 2 ;
+    var w = getRootCellWidth();
+    var h = getRootCellHeight();
+	var tblWidth = w;               console.log(tblWidth);
+	var tblHeight = h;              console.log(tblHeight);
+	var tdWidth = tblWidth/(cols +1) - (cols +1) * borderWidth  ;           console.log(tdWidth);
+	var tdHeight = tblHeight/(rows+1) -  (rows +1) * borderWidth  ;          console.log(tdHeight);
+	
+	for (i = 0; i < tds.length; i++) 
+	{
+		var td = tds[i];
+		var tid = tds[i].id;
+		td.style.width = tdWidth * td.colSpan +"px" ;
+		td.style.height = tdHeight * td.rowSpan +"px";
+		
+		var div = $("#"+tid).children("DIV")[0];
+		div.style.overflow="hidden";
+		div.style.padding="2px";
+		div.style.marginTop = "0px"; 
+		div.style.marginBottom = "0px";
+		div.style.maxWidth = tdWidth * td.colSpan - 5 +"px" ;
+		div.style.maxHeight = tdHeight * td.rowSpan -5  +"px";
+	}
+		
+}
+
 
 /***动态创建可合并和拆分的表格*/
 function tableCreater()
@@ -274,8 +324,8 @@ function tableCreater()
     var cols = $("#cols").val();
     var parent_id = getRootCellRW();  
     
-    var tblWidth = getRootCellWidth();
-    var tblHeight = getRootCellHeight();
+    var tblWidth = getRootCellWidth(); console.log(tblWidth);
+    var tblHeight = getRootCellHeight(); console.log(tblHeight);
     
     if (rows > 0 && cols > 0)
     {

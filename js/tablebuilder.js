@@ -4,6 +4,8 @@ var cardInputBGColor = 'rgb(0,101,153)';
 var cardHighlightBGColor = "#e0e0e0";
 // var headLineStyle = '1px solid #a0a0a0';
 
+var borderWidth = 2;
+
 var selecting = false;
 var curSelection = null;
 var curCardTable = null;
@@ -202,6 +204,7 @@ function MergeCellSelection()
 		}
 	}
 	ClearCellSelection();
+
 }
 
 function ExplodeCellSelection()
@@ -365,7 +368,7 @@ function DeleteCardRow()
 		td.style.borderBottom = cardLineStyle;
 		td.style.borderLeft = cardLineStyle;
 		td.style.borderTop = cardLineStyle;
-		// td.style.cursor = "default";
+		td.style.cursor = "default";
 		tr.appendChild(td);
 		
 		for (j=0;j<curCardTable.nCols;j++){
@@ -423,7 +426,7 @@ function InsertCardCol()
 	td.style.borderBottom = cardLineStyle;
 	td.style.borderLeft = cardLineStyle;
 	td.style.borderTop = cardLineStyle;
-	// td.style.cursor = "default";
+	td.style.cursor = "default";
 	// td.style.lineHeight = '1px';
 	tbody.rows[0].insertBefore(td,null);
 
@@ -490,7 +493,7 @@ function CreateCardItem(fld,txt,type)
 	var div = document.createElement("DIV");
 	div.style.left = 0;
 	div.style.top = 0;
-	// div.style.cursor = "default";
+	div.style.cursor = "default";
 	// div.style.fontSize = "12px";
 	div.style.marginLeft = "3px";
 	div.style.marginRight = "5px";
@@ -532,10 +535,10 @@ function CreateCardCell(r,c)
 	td.style.borderTop = cardLineStyle;
 	td.style.backgroundColor = cardInputBGColor;
 	td.bgc = cardInputBGColor;
-	// td.style.cursor = "default";
+	td.style.cursor = "default";
 	// td.style.fontSize = "12px";
-	// td.align = "left";
-	// td.vAlign = "top";
+	td.align = "left";
+	td.vAlign = "top";
 	td.logr = r;
 	td.logc = c;
 	td.dragStartFunc = CellDragStartFunc;
@@ -555,10 +558,10 @@ function SetCardCell( td, r, c )
 	td.style.borderTop = cardLineStyle;
 	td.style.backgroundColor = cardInputBGColor;
 	td.bgc = cardInputBGColor;
-	// td.style.cursor = "default";
+	td.style.cursor = "default";
 	// td.style.fontSize = "12px";
-	// td.align = "left";
-	// td.vAlign = "top";
+	td.align = "left";
+	td.vAlign = "top";
 	td.logr = r;
 	td.logc = c;
 	td.dragStartFunc = CellDragStartFunc;
@@ -1007,6 +1010,7 @@ function CheckCardBreak(breakAt)
 
 function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 {
+	console.log("CreateCardBuilder:");
 	var tbl= document.createElement("TABLE");
 	curCardTable = tbl;
 	tbl.cellSpacing = 0;
@@ -1018,12 +1022,17 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 	tbl.style.tableLayout = "fixed";
 	tbl.style.marginBottom = '0px';
 	tbl.style.wordWrap = "break-word";
+	tbl.style.overflow=  "hidden";
 	tbl.style.textOverflow = "ellipsis";
-	// tbl.onmouseover = function(){ this.border = 1;};
-	// tbl.onmouseout = function(){ this.border=0;};
 	
 	tbl.width =  tblWidth;
 	tbl.height = tblHeight;
+	
+	console.log(tblWidth);
+	console.log(tblHeight);
+	
+	var tdWidth  = tblWidth/cols - cols * borderWidth + "px"; console.log(tdWidth);
+	var tdHeight = tblHeight/rows - rows * borderWidth  + "px"; console.log(tdHeight);
 
 	var i,j;
 	var tbody = document.createElement("TBODY");
@@ -1041,16 +1050,21 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 			
 			td.id="u"+i+"u"+j;
 			
-			td.style.minHeight=  tblHeight / rows;
-			td.style.maxHeight=  tblHeight / rows;
-			td.style.minWidth= tblWidth / cols;
-			td.style.maxWidth= tblWidth / cols;
 			td.style.tableLlayout= "fixed";
-			td.style.wordWrap="break-word";
-			td.style.textOoverflow= "ellipsis";
-			td.style.overflow= "hidden";
 			td.style.borderColor="white";
 			td.border=2;
+			td.style.wordWrap = "break-word";
+			td.style.overflow=  "hidden";
+			td.style.textOverflow = "ellipsis";
+			td.style.width = tdWidth;
+			td.style.height = tdHeight;
+			
+			var div = document.createElement("DIV");
+			div.style.overflow="hidden";
+			div.style.padding="2px";
+			div.style.marginTop = "0px"; 
+			div.style.marginBottom = "0px";
+			td.appendChild(div);
 
 			tr.appendChild(td);
 		}
@@ -1058,6 +1072,7 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 	
 	return tbl;
 }
+
 
 /*** 对html 里已经存在的表格改造成可合并和拆分的表格 */
 function RestoreCardBuilder(tblWidth, tblHeight)
@@ -1087,21 +1102,20 @@ function RestoreCardBuilder(tblWidth, tblHeight)
 	tbl.height = tblHeight;
 	
 	curCardTable = tbl;
-	// tbl.cellSpacing = 0;
-	// tbl.cellPadding = 0;
+	tbl.cellSpacing = 0;
+	tbl.cellPadding = 0;
 	tbl.nRows = rows;
 	tbl.nCols = cols;
 	tbl.border = 0;
 	tbl.style.marginTop = "0";
 	tbl.style.tableLayout = "fixed";
-	// tbl.style.marginBottom = '0px';
-	// tbl.style.wordWrap = "break-word";
+	tbl.style.marginBottom = '0px';
+	tbl.style.wordWrap = "break-word";
 	tbl.style.textOverflow = "ellipsis";
-	// tbl.onmouseover = function(){ this.border=1;};
-	// tbl.onmouseout = function(){ this.border=0;};
 
 	InitGlobal();	
 }
+
 
 
 function PointWithinElement(x,y,elem)
