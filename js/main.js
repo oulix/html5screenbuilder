@@ -178,9 +178,9 @@ function editCell(id)
 function preView()
 {
     var w = screen.availWidth;
-    var h = screen.availHeight -30;
+    var h = screen.availHeight ;
     var url = "frameset.html";
-    previewW = window.open( url , "_self","menubar=1,resizable=1,width=" +  w +",height=" + h  );
+    previewW = window.open( url , "_blank","menubar=0,resizable=1,width=" +  w +",height=" + h  );
     previewW.moveTo( 0,  0);
     
 }
@@ -213,13 +213,13 @@ function saveTableforCell()
     console.log("saveTableforCell: " + filename);
     
     //保存前清除掉表格的背景色
-    var tbody = $("tbody")[0];  
+   /* var tbody = $("tbody")[0];  
     for (var i = 0; i < tbody.rows.length; i++) {
         var row = tbody.rows[i];
         for (var j = 0; j < row.cells.length; j++) {
            row.cells[j]. style.backgroundColor = "";
         }
-    }
+    }*/
     
     var filecontent = $("#editSet").html();
     WriteTextFile(filename, filecontent);

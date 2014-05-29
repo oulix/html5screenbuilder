@@ -1,6 +1,6 @@
-﻿// var cardLineStyle = '1px solid #d8d8e0';
+﻿var cardLineStyle = '2px solid #ffffff';
 var cardLabelBGColor = '#f0f1f6';
-var cardInputBGColor = '#f8f8f8';
+var cardInputBGColor = 'rgb(0,101,153)';
 var cardHighlightBGColor = "#e0e0e0";
 // var headLineStyle = '1px solid #a0a0a0';
 
@@ -260,8 +260,11 @@ function InsertCardRow()
 	var tr = document.createElement("TR");
 	var td = document.createElement("TD");
 	td.innerHTML = "&nbsp;";
-	// td.style.borderRight = cardLineStyle;
-	// td.style.cursor = "default";
+	td.style.borderRight = cardLineStyle;
+	td.style.borderBottom = cardLineStyle;
+	td.style.borderLeft = cardLineStyle;
+	td.style.borderTop = cardLineStyle;
+	td.style.cursor = "default";
 	tr.appendChild(td);
 
 	var row,cell;
@@ -358,7 +361,10 @@ function DeleteCardRow()
 		
 		td = document.createElement("TD");
 		td.innerHTML = "&nbsp;";
-		// td.style.borderRight = cardLineStyle;
+		td.style.borderRight = cardLineStyle;
+		td.style.borderBottom = cardLineStyle;
+		td.style.borderLeft = cardLineStyle;
+		td.style.borderTop = cardLineStyle;
 		// td.style.cursor = "default";
 		tr.appendChild(td);
 		
@@ -413,7 +419,10 @@ function InsertCardCol()
 
 	td = document.createElement("TD");
 	td.innerHTML = "&nbsp;";
-	// td.style.borderBottom = cardLineStyle;
+	td.style.borderRight = cardLineStyle;
+	td.style.borderBottom = cardLineStyle;
+	td.style.borderLeft = cardLineStyle;
+	td.style.borderTop = cardLineStyle;
 	// td.style.cursor = "default";
 	// td.style.lineHeight = '1px';
 	tbody.rows[0].insertBefore(td,null);
@@ -517,8 +526,10 @@ function CreateCardCell(r,c)
 {
 	var td = document.createElement("TD");
 	td.innerHTML = "&nbsp;";
-	// td.style.borderBottom = cardLineStyle;
-	// td.style.borderRight = cardLineStyle;
+	td.style.borderRight = cardLineStyle;
+	td.style.borderBottom = cardLineStyle;
+	td.style.borderLeft = cardLineStyle;
+	td.style.borderTop = cardLineStyle;
 	td.style.backgroundColor = cardInputBGColor;
 	td.bgc = cardInputBGColor;
 	// td.style.cursor = "default";
@@ -538,8 +549,10 @@ function SetCardCell( td, r, c )
 {
 	// var td = document.createElement("TD");
 	// td.innerHTML = "&nbsp;";
-	// td.style.borderBottom = cardLineStyle;
-	// td.style.borderRight = cardLineStyle;
+	td.style.borderRight = cardLineStyle;
+	td.style.borderBottom = cardLineStyle;
+	td.style.borderLeft = cardLineStyle;
+	td.style.borderTop = cardLineStyle;
 	td.style.backgroundColor = cardInputBGColor;
 	td.bgc = cardInputBGColor;
 	// td.style.cursor = "default";
@@ -1001,13 +1014,13 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 	tbl.nRows = rows;
 	tbl.nCols = cols;
 	tbl.border = 0;
-	tbl.style.marginTop = "0";
+	// tbl.style.marginTop = "0";
 	tbl.style.tableLayout = "fixed";
-	tbl.style.marginBottom = '0px';
+	// tbl.style.marginBottom = '0px';
 	tbl.style.wordWrap = "break-word";
 	tbl.style.textOverflow = "ellipsis";
-	tbl.onmouseover = function(){ this.border = 1;};
-	tbl.onmouseout = function(){ this.border=0;};
+	// tbl.onmouseover = function(){ this.border = 1;};
+	// tbl.onmouseout = function(){ this.border=0;};
 	
 	tbl.width =  tblWidth;
 	tbl.height = tblHeight;
@@ -1036,6 +1049,8 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 			td.style.wordWrap="break-word";
 			td.style.textOoverflow= "ellipsis";
 			td.style.overflow= "hidden";
+			td.style.borderColor="white";
+			td.border=2;
 
 			tr.appendChild(td);
 		}
@@ -1072,18 +1087,18 @@ function RestoreCardBuilder(tblWidth, tblHeight)
 	tbl.height = tblHeight;
 	
 	curCardTable = tbl;
-	tbl.cellSpacing = 0;
-	tbl.cellPadding = 0;
+	// tbl.cellSpacing = 0;
+	// tbl.cellPadding = 0;
 	tbl.nRows = rows;
 	tbl.nCols = cols;
 	tbl.border = 0;
-	tbl.style.marginTop = "0";
+	// tbl.style.marginTop = "0";
 	tbl.style.tableLayout = "fixed";
-	tbl.style.marginBottom = '0px';
+	// tbl.style.marginBottom = '0px';
 	tbl.style.wordWrap = "break-word";
 	tbl.style.textOverflow = "ellipsis";
-	tbl.onmouseover = function(){ this.border=1;};
-	tbl.onmouseout = function(){ this.border=0;};
+	// tbl.onmouseover = function(){ this.border=1;};
+	// tbl.onmouseout = function(){ this.border=0;};
 
 	InitGlobal();	
 }
