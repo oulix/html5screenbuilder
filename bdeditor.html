@@ -46,7 +46,9 @@
         clearUEditor();  
         parent.overlay();  
         parent.saveTableforCell();
-        parent.ResizeTable();
+        
+        //reset table width and height
+        parent.ResizeTable( parent.getRootCellWidth() , parent.getRootCellHeight() );
     }
 
 </script>

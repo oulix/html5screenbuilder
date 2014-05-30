@@ -149,7 +149,7 @@ function initContextMenu( bundleTarget)
                 'btnMerge': function(el) {
                     console.log('Trigger element id '+el.id+'\t 合并'); 
                     MergeCellSelection();
-                    ResizeTable();
+                    ResizeTable( getRootCellWidth() , getRootCellHeight() );
 				},
 				'btnSplit': function(el) {
                     console.log('Trigger element id '+el.id+'\t 拆分');
@@ -269,13 +269,16 @@ function fillContentToTD()
     div.innerHTML = filecontent;
 }
 
-function ResizeTable()
+function ResizeTable(w, h)
 {
 	console.log("ResizeTable:");
 	var tbls = document.getElementsByTagName("TABLE"); // 假定只在#editSet 里有一个表格
 	var tbl = tbls[0];
 	var rows = 0;
 	var cols = 0; 
+    
+    tbl.style.minWidth = w+"px";
+    tbl.style.minHeight = h +"px";
 
 	var tds =tbl.getElementsByTagName('td');
 	for (i = 0; i < tds.length; i++) 
@@ -291,11 +294,11 @@ function ResizeTable()
 	}
 	
     var borderWidth  = 2 ;
-    var w = getRootCellWidth();
-    var h = getRootCellHeight();
+    // var w = getRootCellWidth();
+    // var h = getRootCellHeight();
 	var tblWidth = w;               console.log(tblWidth);
 	var tblHeight = h;              console.log(tblHeight);
-	var tdWidth = tblWidth/(cols +1) - (cols +1) * borderWidth  ;           console.log(tdWidth);
+	var tdWidth = tblWidth/(cols +1) - (cols +1) * borderWidth  ;               console.log(tdWidth);
 	var tdHeight = tblHeight/(rows+1) -  (rows +1) * borderWidth  ;          console.log(tdHeight);
 	
 	for (i = 0; i < tds.length; i++) 
