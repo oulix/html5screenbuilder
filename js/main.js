@@ -115,6 +115,45 @@ function generatorSketch()
 
 }
 
+
+function generatorFrameSketch(rows, cols, borderWidth)
+{
+    var htmlTxt = "<html>";
+    
+    var cellHeight = 100/rows + "%";
+    var cellWidth = 100/cols + "%";
+    
+    var rowSetting ="" ;
+    var colSetting = "";
+   for (var i = 0; i < rows-1; i++) {
+        rowSetting += cellHeight +",";
+   }
+   rowSetting += "*";
+   
+   for(var i = 0; i< cols-1; i++){
+        colSetting +=  cellWidth +",";
+    }
+    colSetting += "*";
+   
+   htmlTxt  += "<frameset rows='" + rowSetting + "'  frameborder='1'  border='"+ borderWidth+"'  >";
+    
+    for (var r= 0; r< rows; r++) {
+            htmlTxt += "<frameset cols='"+ colSetting+"'>";
+        for (var c = 0; c < cols; c++) {
+            htmlTxt += "<frame src='./_session/"+r+"x"+c+"-struct.html' scrolling='no' marginwidth='0' marginheight='0' framespacing='0' >";
+        } 
+            htmlTxt += "</frameset>";
+    }
+    
+   
+    htmlTxt += "</frameset></html>";   
+   
+    console.log(htmlTxt); 
+    return htmlTxt;
+    
+}
+
+
 /* 依赖 jquery.contextmenu.r2.js */
 function initContextMenu( bundleTarget)
 {
@@ -149,7 +188,7 @@ function initContextMenu( bundleTarget)
                 'btnMerge': function(el) {
                     console.log('Trigger element id '+el.id+'\t 合并'); 
                     MergeCellSelection();
-                    ResizeTable( getRootCellWidth() , getRootCellHeight() );
+                    ResizeTable();
 				},
 				'btnSplit': function(el) {
                     console.log('Trigger element id '+el.id+'\t 拆分');
@@ -269,16 +308,13 @@ function fillContentToTD()
     div.innerHTML = filecontent;
 }
 
-function ResizeTable(w, h)
+function ResizeTable()
 {
 	console.log("ResizeTable:");
 	var tbls = document.getElementsByTagName("TABLE"); // 假定只在#editSet 里有一个表格
 	var tbl = tbls[0];
 	var rows = 0;
 	var cols = 0; 
-    
-    tbl.style.minWidth = w+"px";
-    tbl.style.minHeight = h +"px";
 
 	var tds =tbl.getElementsByTagName('td');
 	for (i = 0; i < tds.length; i++) 
@@ -294,11 +330,11 @@ function ResizeTable(w, h)
 	}
 	
     var borderWidth  = 2 ;
-    // var w = getRootCellWidth();
-    // var h = getRootCellHeight();
+    var w = getRootCellWidth();
+    var h = getRootCellHeight();
 	var tblWidth = w;               console.log(tblWidth);
 	var tblHeight = h;              console.log(tblHeight);
-	var tdWidth = tblWidth/(cols +1) - (cols +1) * borderWidth  ;               console.log(tdWidth);
+	var tdWidth = tblWidth/(cols +1) - (cols +1) * borderWidth  ;           console.log(tdWidth);
 	var tdHeight = tblHeight/(rows+1) -  (rows +1) * borderWidth  ;          console.log(tdHeight);
 	
 	for (i = 0; i < tds.length; i++) 
