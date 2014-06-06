@@ -52,8 +52,11 @@ function generatorSketch()
     console.log(rows);
     console.log(cols);
     
-    var screenW = screen.availWidth; //获取屏幕宽度
-    var screenH = screen.availHeight; //获取屏幕高度
+    // var screenW = screen.availWidth; //获取屏幕宽度
+    // var screenH = screen.availHeight; //获取屏幕高度  
+    var screenW = document.body.clientWidth;
+    var screenH =  document.body.clientHeight;
+
     var tableStyle = "style=\"position: absolute;	width: "+screenW+"px; height: "+screenH+"px; background: #eeeeee;\"";
     
     var tdWidth  = screenW / cols;
@@ -261,7 +264,13 @@ function saveTableforCell()
         }
     }*/
     
+    var resizeCode = "<script src='../js/jquery-1.6.2.min.js'></script>\n" +
+                                    "<script src='../js/main.js'></script>\n" +
+                                    "<script> window.addEventListener('resize', ResizeTable);  window.onload=ResizeTable;</script>\n " +
+                                    "<style > html body{   margin-top:0;  margin-left:0;  margin-bottom:0;  margin-right:0;} </style>\n" ;
+                                    
     var filecontent = $("#editSet").html();
+    filecontent  = resizeCode + filecontent;
     WriteTextFile(filename, filecontent);
 }
 
@@ -315,6 +324,7 @@ function ResizeTable()
 	var tbl = tbls[0];
 	var rows = 0;
 	var cols = 0; 
+    var borderWidth = 2;
 
 	var tds =tbl.getElementsByTagName('td');
 	for (i = 0; i < tds.length; i++) 
@@ -323,19 +333,26 @@ function ResizeTable()
 		var arrRC =tid.split("u");  // arrRC = ["0", "3","5"]
 		var r = parseInt( arrRC[1] ) ;
 		var c = parseInt( arrRC[2] ) ;
+        
+        // borderWidth = tds[i].border; 
+        // console.log(borderWidth);
 
 		//得到表格的真实行列数
 		if (rows < r)  rows = r;  
 		if (cols < c )  cols = c; 
 	}
 	
-    var borderWidth  = 2 ;
-    var w = getRootCellWidth();
-    var h = getRootCellHeight();
+    // var borderWidth = 2 ;
+    // var w = getRootCellWidth();
+    // var h = getRootCellHeight();
+    var w = document.documentElement.clientWidth;
+    var h  = document.documentElement.clientHeight;
+    
 	var tblWidth = w;               console.log(tblWidth);
 	var tblHeight = h;              console.log(tblHeight);
-	var tdWidth = tblWidth/(cols +1) - (cols +1) * borderWidth  ;           console.log(tdWidth);
-	var tdHeight = tblHeight/(rows+1) -  (rows +1) * borderWidth  ;          console.log(tdHeight);
+    
+	var tdWidth = (tblWidth - (cols +1) * borderWidth*2)/(cols +1)  ;               console.log(tdWidth);
+	var tdHeight = (tblHeight -  (rows +1) * borderWidth*2)/(rows+1)  ;          console.log(tdHeight);
 	
 	for (i = 0; i < tds.length; i++) 
 	{
@@ -363,12 +380,16 @@ function tableCreater()
     var cols = $("#cols").val();
     var parent_id = getRootCellRW();  
     
-    var tblWidth = getRootCellWidth(); console.log(tblWidth);
-    var tblHeight = getRootCellHeight(); console.log(tblHeight);
+    // var tblWidth = getRootCellWidth(); console.log(tblWidth);
+    // var tblHeight = getRootCellHeight(); console.log(tblHeight);
+    
+    var tblWidth = document.body.offsetWidth;
+    var tblHeight = document.body.offsetHeight;
+    var borderWidth = 2;
     
     if (rows > 0 && cols > 0)
     {
-        var tbl = CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight);
+        var tbl = CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidth);
         
         //clear child nodes first
         var node = document.getElementById("editSet");

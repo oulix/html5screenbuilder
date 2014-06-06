@@ -25,10 +25,15 @@
                 $("#tblWidth").val(getURLParameter("tblW"));
                 
                 loadTableforCell();
+                
+                window.addEventListener("resize", ResizeTable);
+                
         });	
+        
+       
     </script>
 </head>
-<body>
+<body >
 	<div class="navbar-fixed-top titlebar" >
 		<div class="tilteleft">
                 <label class="titlefont">

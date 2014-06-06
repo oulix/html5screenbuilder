@@ -4,7 +4,7 @@ var cardInputBGColor = 'rgb(0,101,153)';
 var cardHighlightBGColor = "#e0e0e0";
 // var headLineStyle = '1px solid #a0a0a0';
 
-var borderWidth = 2;
+// var borderWidth = 2;
 
 var selecting = false;
 var curSelection = null;
@@ -1008,7 +1008,7 @@ function CheckCardBreak(breakAt)
 }
 
 
-function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
+function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidth )
 {
 	console.log("CreateCardBuilder:");
 	var tbl= document.createElement("TABLE");
@@ -1031,8 +1031,8 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 	console.log(tblWidth);
 	console.log(tblHeight);
 	
-	var tdWidth  = tblWidth/cols - cols * borderWidth + "px"; console.log(tdWidth);
-	var tdHeight = tblHeight/rows - rows * borderWidth  + "px"; console.log(tdHeight);
+	var tdWidth  = (tblWidth - cols * borderWidth * 2)/cols + "px"; console.log(tdWidth);
+	var tdHeight = (tblHeight - rows * borderWidth *2)/rows  + "px"; console.log(tdHeight);
 
 	var i,j;
 	var tbody = document.createElement("TBODY");
@@ -1052,7 +1052,7 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight )
 			
 			td.style.tableLlayout= "fixed";
 			td.style.borderColor="white";
-			td.border=2;
+			td.border= borderWidth;
 			td.style.wordWrap = "break-word";
 			td.style.overflow=  "hidden";
 			td.style.textOverflow = "ellipsis";
