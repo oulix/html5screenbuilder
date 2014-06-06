@@ -383,8 +383,8 @@ function tableCreater()
     // var tblWidth = getRootCellWidth(); console.log(tblWidth);
     // var tblHeight = getRootCellHeight(); console.log(tblHeight);
     
-    var tblWidth = document.body.offsetWidth;
-    var tblHeight = document.body.offsetHeight;
+    var tblWidth = window.screen.availWidth ;//document.body.offsetWidth;
+    var tblHeight = window.screen.availHeight;//document.body.offsetHeight;
     var borderWidth = 2;
     
     if (rows > 0 && cols > 0)
