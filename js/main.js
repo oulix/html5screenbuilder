@@ -52,12 +52,13 @@ function generatorSketch()
     console.log(rows);
     console.log(cols);
     
-    // var screenW = screen.availWidth; //获取屏幕宽度
-    // var screenH = screen.availHeight; //获取屏幕高度  
-    var screenW = document.body.clientWidth;
-    var screenH =  document.body.clientHeight;
+    var screenW = screen.availWidth; //获取屏幕宽度
+    var screenH = screen.availHeight; //获取屏幕高度  
 
-    var tableStyle = "style=\"position: absolute;	width: "+screenW+"px; height: "+screenH+"px; background: #eeeeee;\"";
+    // var screenW = document.body.clientWidth;
+    // var screenH =  document.body.clientHeight;
+
+    // var tableStyle = "style=\"position: absolute;	width: "+screenW+"px; height: "+screenH+"px; background: #eeeeee;\"";
     
     var tdWidth  = screenW / cols;
     var tdHeight = screenH / rows;
@@ -97,15 +98,13 @@ function generatorSketch()
     rootCellWidth = tdWidth;
     rootCellHeight = tdHeight;
 
-    // var html = "<table  border='0' cellspacing='0' cellpadding='0' align='center'>\n"; //class=sketch, main.css定义
     var html = style;
     html  += "<table  class='sketchTable' border='0' cellspacing='0' cellpadding='0' align='center'>\n"; 
-    html += "<tbody id='sketch'>\n" 	//约定外框架的tbody的ID为sketch
+    html  += "<tbody id='sketch'>\n" 	//约定外框架的tbody的ID为sketch
     for (var i = 0; i < rows; i++) {
         html += "<tr>"
         for (var j = 0; j < cols; j++) {
             var id = i + "x" + j;
-            // html += "<td class=\"sketchtd\" id=\"" + id + "\" ondblclick='editCell(\"" + id + "\");'>&nbsp;</td>\n"; 
             html += "<td  class='sketchTd' id=\"" + id + "\" ondblclick='editCell(\"" + id + "\");'>&nbsp;</td>\n"; 
         }
         html += "</tr>\n";
@@ -223,9 +222,11 @@ function preView()
     var w = screen.availWidth;
     var h = screen.availHeight ;
     var url = "frameset.html";
-    previewW = window.open( url , "_blank","menubar=0,resizable=1,width=" +  w +",height=" + h  );
+    previewW = window.open( url , "_blank","menubar=0,resizable=1,width=200, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no" );
     previewW.moveTo( 0,  0);
+    previewW.resizeTo(w, h);
     
+    console.log("w + h:" + w + " ," +h);
 }
 
 /*清空单元 */
@@ -430,7 +431,7 @@ function loadSession()
             // row.cells[j].style.backgroundColor = "red";
             var id = row.cells[j].id;
 
-            loadCell(id);
+            // loadCell(id);  //06.06.14 20:22 
 
             console.log(id);
             // console.log ( $("#"+id).html() );			
