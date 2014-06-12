@@ -16,7 +16,7 @@
 + '     <script src="./js/tablebuilder.js" type="text/javascript"> </script>' + "\n"
 + '     <script src="./js/main.js" type="text/javascript"></script>' + "\n"
 + '     <script src="./js/jquery.contextmenu.r2.js"></script>' + "\n"
-+ '' + "\n"
++ '    <script >function 	savetable() { return SaveMe(); }	</script>' + "\n"
 + '   <script type="text/javascript">' + "\n"
 + '         $(function () {' + "\n"
 + ''  + "\n"
