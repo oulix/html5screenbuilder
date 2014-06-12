@@ -201,6 +201,10 @@ function initContextMenu( bundleTarget)
                     console.log('Trigger element id '+el.id+'\t 编辑单元格');
                     overlay();
 				},
+			   'btnSaveMe': function(el) {
+                    console.log('Trigger element id '+el.id+'\t 保存');
+                    SaveMe();
+				},
 			  }
 		});
 }
@@ -274,6 +278,21 @@ function saveTableforCell()
     WriteTextFile(filename, filecontent);
 }
 
+          
+//  保存自身文件
+function SaveMe()
+{
+    var doctype =    '<!DOCTYPE ' 
+                                +  document.doctype.name 
+                                +   (document.doctype.publicId?' PUBLIC "' 
+                                +  document.doctype.publicId + '"':'') 
+                                +  (document.doctype.systemId?' "' 
+                                + document.doctype.systemId + '"':'') 
+                                + '>';
+    var html = document.documentElement.outerHTML;
+    console.log( doctype +  "\n" + html );
+}
+
 /***	从文件载入 外框架单元格内的可编辑表格 */
 function loadTableforCell(){
     var rootRw = getRootCellRW(); // in _tablebuilder.html
@@ -324,12 +343,13 @@ function ResizeTable()
 	var tbl = tbls[0];
 	var rows = 0;
 	var cols = 0; 
-    var borderWidth = 2;
+    
+    borderWidth = getBorderWidth();
 
 	var tds =tbl.getElementsByTagName('td');
 	for (i = 0; i < tds.length; i++) 
 	{
-		var tid = tds[i].id; // id = u3u5
+		var tid = tds[i].id;    // id = u3u5
 		var arrRC =tid.split("u");  // arrRC = ["0", "3","5"]
 		var r = parseInt( arrRC[1] ) ;
 		var c = parseInt( arrRC[2] ) ;
@@ -351,8 +371,8 @@ function ResizeTable()
 	var tblWidth = w;               console.log(tblWidth);
 	var tblHeight = h;              console.log(tblHeight);
     
-	var tdWidth = (tblWidth - (cols +1) * borderWidth*2)/(cols +1)  ;               console.log(tdWidth);
-	var tdHeight = (tblHeight -  (rows +1) * borderWidth*2)/(rows+1)  ;          console.log(tdHeight);
+	var tdWidth = (tblWidth - (cols +1) * borderWidth*2)/(cols +1)  ;              console.log(tdWidth);
+	var tdHeight = (tblHeight -  (rows +1) * borderWidth*2)/(rows+1)  ;         console.log(tdHeight);
 	
 	for (i = 0; i < tds.length; i++) 
 	{
@@ -374,18 +394,19 @@ function ResizeTable()
 
 
 /***动态创建可合并和拆分的表格*/
-function tableCreater()
+function tableCreater( )
 {    
     var rows = $("#rows").val();
     var cols = $("#cols").val();
     var parent_id = getRootCellRW();  
+    var borderWidth = getBorderWidth();
     
     // var tblWidth = getRootCellWidth(); console.log(tblWidth);
     // var tblHeight = getRootCellHeight(); console.log(tblHeight);
     
     var tblWidth = window.screen.availWidth ;//document.body.offsetWidth;
     var tblHeight = window.screen.availHeight;//document.body.offsetHeight;
-    var borderWidth = 2;
+   
     
     if (rows > 0 && cols > 0)
     {

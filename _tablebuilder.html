@@ -52,6 +52,7 @@
         
        <li> <input type="text" id="rows" placeholder="行" value="3" style="width: 25px; height:30px; padding:2px;"  />
                 <input type="text" id="cols" placeholder="列" value="4" style="width: 25px; height:30px;padding:2px;"   />
+                <input type="text" id="tblBdWidth"     placeholder="表格边宽"  value="2"  hidden  />
        <li> <button id="btnGenerator" class="btn btn-success" onclick="tableCreater();" style="height: 30px;width:100px;margin-top:2px;">生成表格</button>
        <li> <button id="btnSave" class="btn btn-success" onclick="saveTableforCell();" style="height: 30px; width:100px;margin-top:2px;"> 保存 </button>
        <li> <button id="btnLoad" class="btn btn-success" onclick="loadTableforCell();" style="height: 30px;width:100px;margin-top:2px;">载入</button>
@@ -90,7 +91,9 @@
             {
                 return $("#tblHight").val();
             }
-       
+            function getBorderWidth() { 
+                return $("#tblBdWidth").val(); 
+            }
             function overlay() 
             {
                 el = document.getElementById("overlay");
