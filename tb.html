@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Table Builder</title>
     <link href="./css/main.css" rel="stylesheet">
-    <style > html body{   margin-top:0;  margin-left:0;  margin-bottom:0;  margin-right:0;} </style>    
+    <style > html body{ margin-top:0;  padding:0;} </style>    
     <script src="./js/jquery-1.6.2.min.js" type="text/javascript"> </script>
     <script src="./js/Position.js" type = "text/javascript"> </script>
 	<script src="./js/common.js" type="text/javascript"> </script>
@@ -41,7 +41,7 @@
 <input type="text" id="rootRW"           placeholder="父单元编号"   value="0x0"  hidden />
 <input type="text" id="tblWidth"         placeholder="表格宽"        value="1024"  hidden  />
 <input type="text" id="tblHight"          placeholder="表格高"        value="768"  hidden  />
-<input type="text" id="tblBdWidth"     placeholder="表格边宽"  value="2"  hidden  />
+<input type="text" id="tblBdWidth"     placeholder="表格边宽"  value="4"  hidden  />
 <input type="text" id="rows" placeholder="行" value="3" hidden />
 <input type="text" id="cols" placeholder="列"  value="3"  hidden />
 <script type="text/javascript" >
@@ -57,9 +57,9 @@
     }
 </script>
     
-<div  style="padding:0; margin:0;" align="center">
-    <div id="editSet"></div>
-</div>
+
+ <div id="editSet" style="padding:0; margin:0; align:center;" ></div>
+
 
  <!--<div id="overlay"  >
     <iframe src="./bdeditor.html" style="height:1024px; width:1024px; border:0px;" id="bd"></iframe>
@@ -70,7 +70,7 @@
   <ul>
     <li id="btnMerge">合并</li>
     <li id="btnSplit">拆分</li>
-    <!--<li id="btnEditingCell">编辑</li>-->
+    <li id="btnEditingCell">编辑</li>
     <li id="btnSaveMe">保存</li>
   </ul>
 </div>

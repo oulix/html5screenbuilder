@@ -1025,6 +1025,9 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidt
 	tbl.style.overflow=  "hidden";
 	tbl.style.textOverflow = "ellipsis";
 	
+	//reset cardLineStyle
+	cardLineStyle = borderWidth + 'px solid #ffffff';
+	
 	// tbl.width =  tblWidth;
 	// tbl.height = tblHeight;
 	// console.log(tblWidth);
@@ -1051,7 +1054,7 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidt
 			
 			td.style.tableLlayout= "fixed";
 			td.style.borderColor="white";
-			td.border= borderWidth;
+			td.border= borderWidth + "px";
 			td.style.wordWrap = "break-word";
 			td.style.overflow=  "hidden";
 			td.style.textOverflow = "ellipsis";
