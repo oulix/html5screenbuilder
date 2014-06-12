@@ -39,6 +39,8 @@ function getAbsolutePath() {
     return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
 }
 
+
+
 //get URL parameters
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
@@ -291,7 +293,10 @@ function SaveMe()
                                 + document.doctype.systemId + '"':'') 
                                 + '>';
     var html = document.documentElement.outerHTML;
-    console.log( doctype +  "\n" + html );
+    html = doctype +  "\n" + html;
+    console.log( html );
+    // WriteTextFile(_rootPath + "../a.html", html);
+    return html;
 }
 
 /***	从文件载入 外框架单元格内的可编辑表格 */
@@ -397,16 +402,19 @@ function ResizeTable()
 /***动态创建可合并和拆分的表格*/
 function tableCreater( )
 {    
+    console.log("tableCreater");
     var rows = $("#rows").val();
     var cols = $("#cols").val();
     var parent_id = getRootCellRW();  
-    var borderWidth = getBorderWidth();
+    var borderWidth = getBorderWidth(); console.log(borderWidth);
     
     // var tblWidth = getRootCellWidth(); console.log(tblWidth);
     // var tblHeight = getRootCellHeight(); console.log(tblHeight);
     
-    var tblWidth = window.screen.availWidth ;//document.body.offsetWidth;
-    var tblHeight = window.screen.availHeight;//document.body.offsetHeight;
+    var tblWidth =  document.documentElement.clientWidth;  //window.screen.availWidth ;
+    // var tblWidth = document.body.offsetWidth;
+    var tblHeight =  document.documentElement.clientHeight; //window.screen.availHeight;
+    // var tblHeight = document.body.offsetHeight;
    
     
     if (rows > 0 && cols > 0)
@@ -424,8 +432,6 @@ function tableCreater( )
         
         initContextMenu("tbody");
     }
-    
-   
 }
 
 function loadSession() 

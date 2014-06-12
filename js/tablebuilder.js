@@ -1025,11 +1025,10 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidt
 	tbl.style.overflow=  "hidden";
 	tbl.style.textOverflow = "ellipsis";
 	
-	tbl.width =  tblWidth;
-	tbl.height = tblHeight;
-	
-	console.log(tblWidth);
-	console.log(tblHeight);
+	// tbl.width =  tblWidth;
+	// tbl.height = tblHeight;
+	// console.log(tblWidth);
+	// console.log(tblHeight);
 	
 	var tdWidth  = (tblWidth - cols * borderWidth * 2)/cols + "px"; console.log(tdWidth);
 	var tdHeight = (tblHeight - rows * borderWidth *2)/rows  + "px"; console.log(tdHeight);
@@ -1098,8 +1097,8 @@ function RestoreCardBuilder(tblWidth, tblHeight)
 		if (cols < c )  cols = c; 
 	}
 
-	tbl.width =  tblWidth;
-	tbl.height = tblHeight;
+	// tbl.width =  tblWidth;
+	// tbl.height = tblHeight;
 	
 	curCardTable = tbl;
 	tbl.cellSpacing = 0;
