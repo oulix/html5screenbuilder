@@ -197,6 +197,7 @@ function initContextMenu( bundleTarget)
 				'btnSplit': function(el) {
                     console.log('Trigger element id '+el.id+'\t 拆分');
                     ExplodeCellSelection();
+                    ResizeTable();
 				},
                 'btnEditingCell': function(el) {
                     console.log('Trigger element id '+el.id+'\t 编辑单元格');
