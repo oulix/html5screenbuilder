@@ -197,8 +197,8 @@ function MergeCellSelection()
 				cell.colSpan = curSelection.logc1-curSelection.logc0+1;
 			}
 			else if (IsCellSelected(cell)){
-/*				if (IsCardItem(cell.firstChild))
-					ReturnItem2Holder(cell.firstChild);*/
+				if (IsCardItem(cell.firstChild))
+					ReturnItem2Holder(cell.firstChild);
 				row.deleteCell(j);
 			}
 		}
@@ -225,7 +225,10 @@ function ExplodeCellSelection()
 	if (curSelection.col1<row.cells.length-1)
 		tgt = row.cells[curSelection.col1+1];
 	for (j=0;j<cell0.colSpan-1;j++){
+		
 		td = CreateCardCell(cell0.logr,cell0.logc+j+1);
+		CreateDIVforTD(td);
+		
 		row.insertBefore(td,tgt);
 	}
 
@@ -240,7 +243,10 @@ function ExplodeCellSelection()
 			}
 		}
 		for (j=0;j<cell0.colSpan;j++){
+			
 			td = CreateCardCell(cell0.logr+i+1,cell0.logc+j);
+			CreateDIVforTD(td);
+			
 			row.insertBefore(td,tgt);
 		}
 	}
@@ -284,7 +290,10 @@ function InsertCardRow()
 			else if (cell.logr==logr){
 				cell.logr++;
 				for (k=0;k<cell.colSpan;k++){
+					
 					td = CreateCardCell(logr,cell.logc+k);
+					CreateDIVforTD(td);
+					
 					tr.appendChild(td);
 				}
 			}
@@ -372,7 +381,10 @@ function DeleteCardRow()
 		tr.appendChild(td);
 		
 		for (j=0;j<curCardTable.nCols;j++){
+			
 			td = CreateCardCell(0,j);
+			CreateDIVforTD(td);
+			
 			tr.appendChild(td);
 		}
 		curCardTable.nRows = 1;
@@ -407,7 +419,10 @@ function InsertCardCol()
 						if (IsCardCell(dest.cells[l]) && dest.cells[l].logc>logc)
 							break;
 					}
+					
 					td = CreateCardCell(cell.logr+k,logc);
+					CreateDIVforTD(td);
+					
 					if (l<dest.cells.length)
 						dest.insertBefore(td,dest.cells[l]);
 					else
@@ -528,6 +543,7 @@ function CreateCardItem(fld,txt,type)
 function CreateCardCell(r,c)
 {
 	var td = document.createElement("TD");
+	td.id="u"+r+"u"+c;
 	td.innerHTML = "&nbsp;";
 	td.style.borderRight = cardLineStyle;
 	td.style.borderBottom = cardLineStyle;
@@ -596,6 +612,16 @@ function CreateItemHolder(type)
 		div.style.display = 'none';
 	}
 	return div;
+}
+
+function CreateDIVforTD(td)
+{
+	var div = document.createElement("DIV");
+	div.style.overflow="hidden";
+	div.style.padding="2px";
+	div.style.marginTop = "0px"; 
+	div.style.marginBottom = "0px";
+	td.appendChild(div);	
 }
 
 function ReturnItem2Holder(elem)
@@ -1048,9 +1074,9 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidt
 		tbody.appendChild(tr);	
 
 		for (j=0;j<cols;j++){
-			td = CreateCardCell(i,j);
 			
-			td.id="u"+i+"u"+j;
+			td = CreateCardCell(i,j);
+			CreateDIVforTD(td);
 			
 			td.style.tableLlayout= "fixed";
 			td.style.borderColor="white";
@@ -1060,13 +1086,6 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidt
 			td.style.textOverflow = "ellipsis";
 			td.style.width = tdWidth;
 			td.style.height = tdHeight;
-			
-			var div = document.createElement("DIV");
-			div.style.overflow="hidden";
-			div.style.padding="2px";
-			div.style.marginTop = "0px"; 
-			div.style.marginBottom = "0px";
-			td.appendChild(div);
 
 			tr.appendChild(td);
 		}

@@ -386,7 +386,10 @@ function ResizeTable()
 		var td = tds[i];
 		var tid = tds[i].id;
 		td.style.width = tdWidth * td.colSpan +"px" ;
-		td.style.height = tdHeight * td.rowSpan +"px";
+		td.style.height = tdHeight * td.rowSpan +"px";  
+        console.log("tid=" + tid);
+        console.log(td.style.width);
+        console.log(td.style.height);
 		
 		var div = $("#"+tid).children("DIV")[0];
 		div.style.overflow="hidden";
