@@ -527,3 +527,11 @@ if(window.innerWidth){
 }
 
 
+function getElementIDByPoint()
+{
+    var elem = FindElementFromPoint(window.event.clientX,window.event.clientY); 
+    console.log(elem.id)    ;
+    return elem.id;
+}
+
+
