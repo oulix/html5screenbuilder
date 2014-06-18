@@ -25,7 +25,9 @@
                 }
                 else { // restore dynamic merge/combine table
                      initContextMenu("tbody"); 
-                    RestoreCardBuilder(400, 400);
+					 
+					var borderWidth = getBorderWidth();
+                    RestoreCardBuilder(400, 400, borderWidth);
                 }
                 
                 // window.addEventListener("resize", ResizeTable);

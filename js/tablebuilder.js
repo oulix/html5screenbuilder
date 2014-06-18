@@ -1096,12 +1096,15 @@ function CreateCardBuilder(rows,cols, parent_id, tblWidth, tblHeight, borderWidt
 
 
 /*** 对html 里已经存在的表格改造成可合并和拆分的表格 */
-function RestoreCardBuilder(tblWidth, tblHeight)
+function RestoreCardBuilder(tblWidth, tblHeight, borderWidth)
 { 
 	var tbls = document.getElementsByTagName("TABLE"); // 假定只在#editSet 里有一个表格
 	var tbl = tbls[0];
 	var rows = 0;
 	var cols = 0; 
+	
+	//reset cardLineStyle
+	cardLineStyle = borderWidth + 'px solid #ffffff';
 
 	var td =tbl.getElementsByTagName('td');
 	for (i = 0; i < td.length; i++) 

@@ -382,7 +382,7 @@ function ResizeTable()
     var h  = geometry.getViewportHeight();
     
 	var tblWidth = w;               console.log(tblWidth);
-	var tblHeight = h;              console.log(tblHeight);
+	var tblHeight = h;               console.log(tblHeight);
     
 	var tdWidth = (tblWidth - (cols +1) * borderWidth*2)/(cols +1)  ;              console.log(tdWidth);
 	var tdHeight = (tblHeight -  (rows +1) * borderWidth*2)/(rows+1)  ;         console.log(tdHeight);
@@ -421,10 +421,14 @@ function tableCreater( )
     // var tblWidth = getRootCellWidth(); console.log(tblWidth);
     // var tblHeight = getRootCellHeight(); console.log(tblHeight);
     
-    var tblWidth =  document.documentElement.clientWidth;  //window.screen.availWidth ;
-    // var tblWidth = document.body.offsetWidth;
-    var tblHeight =  document.documentElement.clientHeight; //window.screen.availHeight;
+   
+    // var tblWidth = document.body.offsetWidth; 
     // var tblHeight = document.body.offsetHeight;
+    // var tblWidth =  document.documentElement.clientWidth;  //window.screen.availWidth ;
+    // var tblHeight =  document.documentElement.clientHeight; //window.screen.availHeight;
+    var tblWidth = geometry.getViewportHeight();  
+    var tblHeight =  geometry.getViewportWidth();
+
    
     
     if (rows > 0 && cols > 0)
