@@ -1,4 +1,5 @@
-﻿function make_tbfile( rows, cols, bdwidth,  rootRW )
+﻿//the generated tb.html files with this function should be saved to _session folder
+function make_tbfile( rows, cols, bdwidth,  rootRW )
 { 
 	return   html =  ""
 + '<!DOCTYPE html> ' + "\n"
@@ -8,14 +9,14 @@
     + '<meta http-equiv="X-UA-Compatible" content="IE=edge"> ' + "\n"
     + '<meta name="viewport" content="width=device-width, initial-scale=1"> ' + "\n"
     + '<title>Table Builder</title> ' + "\n"
-    + '<link href="./css/main.css" rel="stylesheet"> ' + "\n"
+    + '<link href="../css/main.css" rel="stylesheet"> ' + "\n"
     + '<style > html body{ margin-top:0;  padding:0;} </style>     ' + "\n"
-    + '<script src="./js/jquery-1.6.2.min.js" type="text/javascript"> </script> ' + "\n"
-    + '<script src="./js/Position.js" type = "text/javascript"> </script> ' + "\n"
-	+ '<script src="./js/common.js" type="text/javascript"> </script> ' + "\n"
-    + '<script src="./js/tablebuilder.js" type="text/javascript"> </script> ' + "\n"
-    + '<script src="./js/main.js" type="text/javascript"></script> ' + "\n"
-    + '<script src="./js/jquery.contextmenu.r2.js"></script> ' + "\n"
+    + '<script src="../js/jquery-1.6.2.min.js" type="text/javascript"> </script> ' + "\n"
+    + '<script src="../js/Position.js" type = "text/javascript"> </script> ' + "\n"
+	+ '<script src="../js/common.js" type="text/javascript"> </script> ' + "\n"
+    + '<script src="../js/tablebuilder.js" type="text/javascript"> </script> ' + "\n"
+    + '<script src="../js/main.js" type="text/javascript"></script> ' + "\n"
+    + '<script src="../js/jquery.contextmenu.r2.js"></script> ' + "\n"
 	+ '<script >function 	savetable() { return SaveMe(); }	</script> ' + "\n"
 + '	 ' + "\n"
     + '<script type="text/javascript"> ' + "\n"
@@ -72,7 +73,7 @@
 + ' ' + "\n"
 + ' ' + "\n"
 + '<!-- <div id="overlay"  > ' + "\n"
-    + '<iframe src="./bdeditor.html" style="height:1024px; width:1024px; border:0px;" id="bd"></iframe> ' + "\n"
+    + '<iframe src="../bdeditor.html" style="height:1024px; width:1024px; border:0px;" id="bd"></iframe> ' + "\n"
 + '</div>--> ' + "\n"
 + ' ' + "\n"
 + '<!--右键菜单--> ' + "\n"

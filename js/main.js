@@ -147,7 +147,8 @@ function generatorFrameSketch(rows, cols, borderWidth)
     for (var r= 0; r< rows; r++) {
             htmlTxt += "<frameset cols='"+ colSetting+"'>";
         for (var c = 0; c < cols; c++) {
-            htmlTxt += "<frame src='./_session/"+r+"x"+c+"-struct.html' scrolling='no' marginwidth='0' marginheight='0' framespacing='0' >";
+            // htmlTxt += "<frame src='./_session/"+r+"x"+c+"-struct.html' scrolling='no' marginwidth='0' marginheight='0' framespacing='0' >";
+            htmlTxt += "<frame src='./_session/"+( r * cols +  c+1 ) +".html' scrolling='no' marginwidth='0' marginheight='0' framespacing='0' >";
         } 
             htmlTxt += "</frameset>";
     }
