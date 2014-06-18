@@ -54,8 +54,11 @@ function generatorSketch()
     console.log(rows);
     console.log(cols);
     
-    var screenW = screen.availWidth; //获取屏幕宽度
-    var screenH = screen.availHeight; //获取屏幕高度  
+    // var screenW = screen.availWidth; //获取屏幕宽度
+    // var screenH = screen.availHeight; //获取屏幕高度  
+    
+    var screenW = geometry.getViewportWidth();
+    var screenH = geometry.getViewportHeight();
 
     // var screenW = document.body.clientWidth;
     // var screenH =  document.body.clientHeight;
@@ -372,8 +375,11 @@ function ResizeTable()
     // var borderWidth = 2 ;
     // var w = getRootCellWidth();
     // var h = getRootCellHeight();
-    var w = document.documentElement.clientWidth;
-    var h  = document.documentElement.clientHeight;
+    // var w = document.documentElement.clientWidth;
+    // var h  = document.documentElement.clientHeight;
+    
+    var w = geometry.getViewportWidth();
+    var h  = geometry.getViewportHeight();
     
 	var tblWidth = w;               console.log(tblWidth);
 	var tblHeight = h;              console.log(tblHeight);
@@ -502,5 +508,18 @@ function loadContent(parent_id, child_id) {
     $("#" + id).html(content);
 }
 
+
+//define geometry object to get accurate viewport's width and height
+var geometry={};
+if(window.innerWidth){
+  geometry.getViewportWidth =function(){  return window.innerWidth;  }
+  geometry.getViewportHeight =function(){  return window.innerHeight;  }
+}else if(document.documentElement && document.documentElement.clientWidth){
+  geometry.getViewportWidth =function(){  return document.documentElement.clientWidth;  }
+  geometry.getViewportHeight =function(){ return document.documentElement.clientHeight;  }
+}else if(document.body.clientWidth){
+  geometry.getViewportWidth =function(){   return document.body.clientWidth;   }
+  geometry.getViewportHeight =function(){  return document.body.clientHeight;  }
+}
 
 

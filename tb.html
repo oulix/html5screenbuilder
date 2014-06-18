@@ -28,9 +28,13 @@
                     RestoreCardBuilder(400, 400);
                 }
                 
-                // ResizeTable();
+                // window.addEventListener("resize", ResizeTable);
+                if (window.addEventListener) {
+                    window.addEventListener("resize", ResizeTable);
+                } else if (window.attachEvent) {
+                    window.attachEvent("resize", ResizeTable);
+                }
                 
-                window.addEventListener("resize", ResizeTable);
                 window.onload = ResizeTable;
         });	
     </script>

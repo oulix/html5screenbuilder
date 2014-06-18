@@ -1,7 +1,13 @@
-html {
+html  body {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
+	
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+	
 }
 .titlebar {
 	height: 40px;
