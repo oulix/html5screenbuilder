@@ -536,3 +536,8 @@ function getElementIDByPoint()
 }
 
 
+function fillelementwithcontent(id, content)
+{
+  $("#"+id).htm(content);
+}
+
