@@ -268,7 +268,7 @@ function InsertCardRow()
 	var tbody = curCardTable.tBodies[0];
 	var tr = document.createElement("TR");
 	var td = document.createElement("TD");
-	td.innerHTML = "&nbsp;";
+	td.innerHTML = "";
 	td.style.borderRight = cardLineStyle;
 	td.style.borderBottom = cardLineStyle;
 	td.style.borderLeft = cardLineStyle;
@@ -372,7 +372,7 @@ function DeleteCardRow()
 		tbody.appendChild(tr);
 		
 		td = document.createElement("TD");
-		td.innerHTML = "&nbsp;";
+		td.innerHTML = "";
 		td.style.borderRight = cardLineStyle;
 		td.style.borderBottom = cardLineStyle;
 		td.style.borderLeft = cardLineStyle;
@@ -436,7 +436,7 @@ function InsertCardCol()
 	}
 
 	td = document.createElement("TD");
-	td.innerHTML = "&nbsp;";
+	td.innerHTML = "";
 	td.style.borderRight = cardLineStyle;
 	td.style.borderBottom = cardLineStyle;
 	td.style.borderLeft = cardLineStyle;
@@ -544,7 +544,7 @@ function CreateCardCell(r,c)
 {
 	var td = document.createElement("TD");
 	td.id="u"+r+"u"+c;
-	td.innerHTML = "&nbsp;";
+	td.innerHTML = "";
 	td.style.borderRight = cardLineStyle;
 	td.style.borderBottom = cardLineStyle;
 	td.style.borderLeft = cardLineStyle;
@@ -619,8 +619,10 @@ function CreateDIVforTD(td)
 	var div = document.createElement("DIV");
 	div.style.overflow="hidden";
 	div.style.padding="2px";
-	div.style.marginTop = "0px"; 
-	div.style.marginBottom = "0px";
+	div.style.marginTop = "2px"; 
+	div.style.marginBottom = "2px";
+	div.style.marginLeft = "2px"; 
+	div.style.marginRight = "2px"; 
 	td.appendChild(div);	
 }
 
