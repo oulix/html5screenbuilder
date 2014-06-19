@@ -539,6 +539,6 @@ function getElementIDByPoint()
 function fillelementwithcontent(id, content)
 {
     var div = $("#"+id).children("DIV")[0];
-    div.innerHTML = filecontent;
+    div.innerHTML = content;
 }
 
