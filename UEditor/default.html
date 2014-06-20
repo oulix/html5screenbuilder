@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>百度文档编辑器</title>
+<script type="text/javascript" charset="gbk" src = "ueditor.config.js" ></script>
+<script type="text/javascript" charset="gbk" src="ueditor.all.js"></script>
+<script type="text/javascript" charset="gbk" src = "ueditor-patch-149.js" ></script>
+<script type="text/javascript" charset="gbk" src="lang/zh-cn/zh-cn.js"></script>
+</head>
+
+<body>
+<script id="editor" name="content" type="text/plain"></script>
+<script id="editor" type="text/plain" style="width:1600px;height:800px;"></script>
+</body>
+<script type="text/javascript">
+    var editor = UE.getEditor('editor');
+	
+	 function getallhtml() {
+        var allhtml = editor.getAllHtml();
+		return allhtml;
+    }
+    function getcontent() {
+        var content = editor.getContent();
+        return content;
+    }
+    function getplaintxt() {
+       
+        arr.push(UE.getEditor('editor').getPlainTxt());
+        alert(arr.join('\n'))
+    }
+    function setcontent(isAppendTo) {
+       
+        editor.setContent('欢迎使用ueditor', isAppendTo);
+       
+    }
+	
+	 function hascontents() {
+        
+        var bContent = editor.hasContents();
+		return bContent;
+    }
+	
+
+	
+</script>
+
+
+</html>
