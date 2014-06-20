@@ -40,6 +40,22 @@ function ClearCellSelection()
 	curSelection = null;
 }
 
+function isEmptyCellSelection()
+{
+	var tbody = curCardTable.tBodies[0];
+	var i,j;
+	var row;
+	for (i=0;i<tbody.rows.length;i++){
+		row = tbody.rows[i];
+		for (j=0;j<row.cells.length;j++){
+			var cell = row.cells[j];
+			if(  IsCellSelected(cell) && cell.firstChild.innerHTML != "")
+				return false;
+		}
+	}
+	return true;
+}
+
 function IsCellSelected(cell)
 {
 	if (!IsCardCell(cell))
@@ -171,7 +187,10 @@ function MergeCell( rwArr )
 
 function MergeCellSelection()
 {
-	if (curSelection==null)
+	if ( curSelection==null )
+		return;
+	
+	if ( ! isEmptyCellSelection() )
 		return;
 		
 	var record = [curSelection.logr0, curSelection.logc0, curSelection.logr1, curSelection.logc1];	
@@ -305,7 +324,7 @@ function InsertCardRow()
 	tbody.insertBefore(tr,tbody.rows[logr+1]);
 	curCardTable.nRows++;
 
-//	ClearCellSelection();
+	ClearCellSelection();
 	curSelection.row0++;
 	curSelection.row1++;
 	curSelection.logr0++;
@@ -446,7 +465,7 @@ function InsertCardCol()
 	tbody.rows[0].insertBefore(td,null);
 
 	curCardTable.nCols++;
-//	ClearCellSelection();
+	ClearCellSelection();
 	curSelection.col0++;
 	curSelection.col1++;
 	curSelection.logc0++;
@@ -566,7 +585,6 @@ function CreateCardCell(r,c)
 
 function SetCardCell( td, r, c )
 {
-	// var td = document.createElement("TD");
 	// td.innerHTML = "&nbsp;";
 	td.style.borderRight = cardLineStyle;
 	td.style.borderBottom = cardLineStyle;
