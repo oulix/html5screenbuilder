@@ -555,14 +555,20 @@ function fillcontenttodiv(div, content)
 function istdempty(td)
 {
     var divid = td.replace('u','v');
-    var p = $("#"+divid).children("p")[0];
-    return p.innerHTML == '';
+    var p = $("#"+divid).children("P")[0];
+    if(typeof(p) !=  'undefined')
+        return p.innerHTML == '';
+    else
+        return true;
 }
 
 function gettdcontent(td)
 {
     var divid = td.replace('u','v');
-    var p = $("#"+divid).children("p")[0];
-    return p.innerHTML;
+    var p = $("#"+divid).children("P")[0];
+    if(typeof(p) != 'undefined' )
+        return p.innerHTML;
+    else
+        return '';
 }
 
