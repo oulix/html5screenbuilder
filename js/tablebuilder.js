@@ -623,6 +623,8 @@ function CreateDIVforTD(td)
 	div.style.marginBottom = "2px";
 	div.style.marginLeft = "2px"; 
 	div.style.marginRight = "2px"; 
+	div.style.display = "none";
+	div.id = td.id.replace('u', 'v');
 	td.appendChild(div);	
 }
 

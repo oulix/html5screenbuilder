@@ -542,3 +542,8 @@ function fillelementwithcontent(id, content)
     div.innerHTML = content;
 }
 
+function fillcontenttodiv(div, content)
+{
+    $("#"+div).html(content);
+}
+
