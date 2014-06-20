@@ -552,3 +552,17 @@ function fillcontenttodiv(div, content)
     $("#"+div).html(content);
 }
 
+function istdempty(td)
+{
+    var divid = td.replace('u','v');
+    var p = $("#"+divid).children("p")[0];
+    return p.innerHTML == '';
+}
+
+function gettdcontent(td)
+{
+    var divid = td.replace('u','v');
+    var p = $("#"+divid).children("p")[0];
+    return p.innerHTML;
+}
+
