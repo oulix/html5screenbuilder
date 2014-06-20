@@ -15,6 +15,7 @@
     <script src="./js/jquery.contextmenu.r2.js"></script>
 	<script >function 	savetable() { return SaveMe(); }	</script>
 	<script >function 	getelementidbyposition(x,y) { var elem=  FindElementFromPoint(x,y); return elem.id; }</script>
+	<script >function 	cancelselection() { ClearCellSelection(); }</script>
 	
     <script type="text/javascript">
         $(function () {
@@ -39,6 +40,10 @@
                 }
                 
                 window.onload = ResizeTable;
+                
+               $(document).keyup(function(e) {
+                  if (e.keyCode == 27) { cancelselection();  }   // esc
+                });
         });	
     </script>
 
@@ -80,6 +85,7 @@
     <li id="btnSplit">拆分</li>
     <li id="btnEditingCell">编辑</li>
     <li id="btnSaveMe">保存</li>
+    <li id="btnClearSel">撤销选择</li>
   </ul>
 </div>
     

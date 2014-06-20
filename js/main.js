@@ -211,6 +211,10 @@ function initContextMenu( bundleTarget)
 			   'btnSaveMe': function(el) {
                     console.log('Trigger element id '+el.id+'\t 保存');
                     SaveMe();
+				},
+			   'btnClearSel': function(el) {
+                    console.log('Trigger element id '+el.id+'\t 取消');
+                    ClearCellSelection();
 				}
 			  }
 		});
