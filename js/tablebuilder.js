@@ -644,7 +644,7 @@ function CreateDIVforTD(td)
 {
 	var div = document.createElement("DIV");
 	div.style.overflow="hidden";
-	div.style.padding="0px";
+	div.style.padding="2px";
 	div.style.marginTop = "-5px"; 
 	// div.style.marginBottom = "2px";
 	// div.style.marginLeft = "2px"; 

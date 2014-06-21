@@ -231,20 +231,24 @@ function InitGlobal()
 
 	$(gblElementIds).die('mousedown.'+gblNameSpace).live(
 		'mousedown.'+gblNameSpace, function(e){
-			DefaultMouseDown(e);
+			if ( e.which == 1 ) //left mouse key
+			{	DefaultMouseDown(e); }
 	})
 	.die('click').live('click', function(evt){
-		GetWindowEvent(evt);
-		var elem = window.event.srcElement;
-		if (!gblDrag.dragging && elem && elem.dragStartFunc!=null && typeof(elem.dragStartFunc) == "function"){
-			if (! gblDrag.dragging) {
-				DefaultStartDrag(evt);
-				DefaultMouseStop(evt);
+		if ( evt.which == 1 ){ //left mouse key
+			GetWindowEvent(evt);
+			var elem = window.event.srcElement;
+			if (!gblDrag.dragging && elem && elem.dragStartFunc!=null && typeof(elem.dragStartFunc) == "function"){
+				if (! gblDrag.dragging) {
+					DefaultStartDrag(evt);
+					DefaultMouseStop(evt);
+				}
 			}
 		}
 	});
 	$(document).bind('mouseup.'+gblNameSpace, function(e) {
-		DefaultMouseUp(e);
+		if ( e.which == 1 ) //left mouse key
+		{	DefaultMouseUp(e); }
 	});
 }
 
