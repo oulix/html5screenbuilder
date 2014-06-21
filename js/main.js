@@ -204,6 +204,10 @@ function initContextMenu( bundleTarget)
                     ExplodeCellSelection();
                     ResizeTable();
 				},
+                'btnClear': function(el) {
+                    console.log('Trigger element id '+el.id+'\t 清除');
+                    ClearCellSelectionContent();
+				},
                 'btnEditingCell': function(el) {
                     console.log('Trigger element id '+el.id+'\t 编辑单元格');
                     overlay();
