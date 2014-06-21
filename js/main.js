@@ -408,10 +408,10 @@ function ResizeTable()
         console.log(td.style.height);
 		
 		var div = $("#"+tid).children("DIV")[0];
-		div.style.overflow="hidden";
-		div.style.padding="2px";
-		div.style.marginTop = "0px"; 
-		div.style.marginBottom = "0px";
+		// div.style.overflow="hidden";
+		// div.style.padding="2px";
+		// div.style.marginTop = "0px"; 
+		// div.style.marginBottom = "0px";
 		div.style.maxWidth = tdWidth * td.colSpan - 5 +"px" ;
 		div.style.maxHeight = tdHeight * td.rowSpan -5  +"px";
 	}

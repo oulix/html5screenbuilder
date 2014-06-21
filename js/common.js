@@ -1,8 +1,3 @@
-function isDefined(val){
-	return (val!=null && typeof(val)!="undefined");
-}
-
-
 var gblTooltipDiv = null;
 var gblTipTimeout = null;
 
@@ -238,7 +233,7 @@ function InitGlobal()
 		'mousedown.'+gblNameSpace, function(e){
 			DefaultMouseDown(e);
 	})
-	.die('dblclick').live('dblclick', function(evt){
+	.die('click').live('click', function(evt){
 		GetWindowEvent(evt);
 		var elem = window.event.srcElement;
 		if (!gblDrag.dragging && elem && elem.dragStartFunc!=null && typeof(elem.dragStartFunc) == "function"){
