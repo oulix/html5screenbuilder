@@ -576,3 +576,12 @@ function gettdcontent(td)
         return '';
 }
 
+function getelementidbyposition(x,y) 
+{ 
+    var elem=  FindElementFromPoint(x,y);  
+    var reg = /u\du\d/;
+    while ( ! reg.test(elem.id) ){
+        elem = elem.parentNode;
+    }
+    return elem.id; 
+}
