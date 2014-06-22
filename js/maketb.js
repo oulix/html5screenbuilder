@@ -18,7 +18,6 @@ function make_tbfile( rows, cols, bdwidth,  rootRW )
     + '<script src="../js/main.js" type="text/javascript"></script> ' + "\n"
     + '<script src="../js/jquery.contextmenu.r2.js"></script> ' + "\n"
 	+ '<script >function 	savetable() { return SaveMe(); }	</script> ' + "\n"
-    + '<script >function 	getelementidbyposition(x,y) { var elem=  FindElementFromPoint(x,y); return elem.id; }</script>' + "\n"
     + '<script >function 	cancelselection() { ClearCellSelection(); }</script>' + "\n"
 + '	 ' + "\n"
     + '<script type="text/javascript"> ' + "\n"
