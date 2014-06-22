@@ -206,7 +206,7 @@ function initContextMenu( bundleTarget)
 				},
                 'btnClear': function(el) {
                     console.log('Trigger element id '+el.id+'\t 清除');
-                    ClearCellSelectionContent();
+                    clearcellselectioncontent();
 				},
                 'btnEditingCell': function(el) {
                     console.log('Trigger element id '+el.id+'\t 编辑单元格');
@@ -584,4 +584,12 @@ function getelementidbyposition(x,y)
         elem = elem.parentNode;
     }
     return elem.id; 
+}
+
+function clearcellselectioncontent()
+{
+	var cell = getelementidbyposition(window.event.clientX,window.event.clientY); 
+	if(  IsCellSelected(cell) && cell.firstChild.innerHTML != ""){
+		 cell.firstChild.innerHTML = '';
+	}
 }

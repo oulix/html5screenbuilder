@@ -56,13 +56,13 @@ function isEmptyCellSelection()
 	return true;
 }
 
-function ClearCellSelectionContent()
+/*function ClearCellSelectionContent()
 {
 	var cell = FindElementFromPoint(window.event.clientX,window.event.clientY); console.log(cell.id);
 	if(  IsCellSelected(cell) && cell.firstChild.innerHTML != ""){
 		 cell.firstChild.innerHTML = '';
 	}
-}
+}*/
 
 function IsCellSelected(cell)
 {
