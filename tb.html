@@ -55,7 +55,7 @@
 <input type="text" id="tblHight"          placeholder="表格高"        value="768"  hidden  />
 <input type="text" id="tblBdWidth"     placeholder="表格边宽"  value="4"  hidden  />
 <input type="text" id="rows" placeholder="行" value="3" hidden />
-<input type="text" id="cols" placeholder="列"  value="3"  hidden />
+<input type="text" id="cols" placeholder="列"  value="4"  hidden />
 <script type="text/javascript" >
     function getSelCellRowCol() { return $("#selectedRW").val();}
     function getRootCellRW() {  return $("#rootRW").val();  }
@@ -70,7 +70,7 @@
 </script>
     
 
- <div id="editSet" style="padding:0; margin:0; align:center;" ></div>
+ <div id="editSet" style="padding:0; margin:0; align:center;"  onclick="selectacell(window.event.clientX, window.event.clientY)"></div>
 
 
 <!-- <div id="overlay"  >

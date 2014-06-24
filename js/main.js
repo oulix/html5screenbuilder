@@ -597,3 +597,14 @@ function clearcellselectioncontent(x,y)
 		 cell.firstChild.innerHTML = '';
 	}
 }
+
+function selectacell(x, y)
+{
+    var cellid = getelementidbyposition(x,y);
+    var cell = document.getElementById(cellid);
+	if( ! IsCellSelected(cell) )
+    {
+        ClearCellSelection();
+        setCellSelected(cell);
+    }
+}

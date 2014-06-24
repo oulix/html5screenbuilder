@@ -74,6 +74,11 @@ function IsCellSelected(cell)
 	return false;
 }
 
+function setCellSelected(cell)
+{
+	cell.style.backgroundColor = cardHighlightBGColor;
+}
+
 function DrawCellSelection()
 {
 	if (curSelection==null)
