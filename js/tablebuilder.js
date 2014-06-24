@@ -76,6 +76,13 @@ function IsCellSelected(cell)
 
 function setCellSelected(cell)
 {
+	var r0 = cell.parentNode.rowIndex;
+	var c0 = cell.cellIndex;
+	curSelection = new CellSelection(r0,c0,r0,c0); 
+	curSelection.logr0 = cell.logr;
+	curSelection.logr1 = cell.logr;
+	curSelection.logc0 = cell.logc;
+	curSelection.logc1 = cell.logc;
 	cell.style.backgroundColor = cardHighlightBGColor;
 }
 

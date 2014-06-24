@@ -572,11 +572,12 @@ function istdempty(td)
 function gettdcontent(td)
 {
     var divid = td.replace('u','v');
-    var p = $("#"+divid).children("P")[0];
+    return $("#"+divid).html();
+/*    var p = $("#"+divid).children("P")[0];
     if(typeof(p) != 'undefined' )
         return p.innerHTML;
     else
-        return '';
+        return '';*/
 }
 
 function getelementidbyposition(x,y) 
@@ -602,9 +603,6 @@ function selectacell(x, y)
 {
     var cellid = getelementidbyposition(x,y);
     var cell = document.getElementById(cellid);
-	if( ! IsCellSelected(cell) )
-    {
-        ClearCellSelection();
-        setCellSelected(cell);
-    }
+    ClearCellSelection();
+    setCellSelected(cell);
 }
