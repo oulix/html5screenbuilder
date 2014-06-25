@@ -417,6 +417,7 @@ function ResizeTable()
 		// div.style.marginBottom = "0px";
 		div.style.maxWidth = tdWidth * td.colSpan - 5 +"px" ;
 		div.style.maxHeight = tdHeight * td.rowSpan -5  +"px";
+        div.onclick = function(){ selectacell(window.event.clientX, window.event.clientY);};
 	}
 		
 }

@@ -73,7 +73,7 @@ function make_tbfile( rows, cols, bdwidth,  rootRW )
 + '</script> ' + "\n"
 + '     ' + "\n"
 + ' ' + "\n"
- + '<div id="editSet" style="padding:0; margin:0; align:center;"  onclick="selectacell(window.event.clientX, window.event.clientY)"></div> ' + "\n"
+ + '<div id="editSet" style="padding:0; margin:0; align:center;" ></div> ' + "\n"
 + ' ' + "\n"
 + ' ' + "\n"
 + '<!-- <div id="overlay"  > ' + "\n"
