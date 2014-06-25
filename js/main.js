@@ -364,33 +364,11 @@ function ResizeTable()
 	console.log("ResizeTable:");
 	var tbls = document.getElementsByTagName("TABLE"); // 假定只在#editSet 里有一个表格
 	var tbl = tbls[0];
-	var rows = 0;
-	var cols = 0; 
-    
+    var rows = $("#rows").val() - 1;
+    var cols = $("#cols").val() - 1;
+
     borderWidth = getBorderWidth();
-
-	var tds =tbl.getElementsByTagName('td');
-	for (i = 0; i < tds.length; i++) 
-	{
-		var tid = tds[i].id;    // id = u3u5
-		var arrRC =tid.split("u");  // arrRC = ["0", "3","5"]
-		var r = parseInt( arrRC[1] ) ;
-		var c = parseInt( arrRC[2] ) ;
-        
-        // borderWidth = tds[i].border; 
-        // console.log(borderWidth);
-
-		//得到表格的真实行列数
-		if (rows < r)  rows = r;  
-		if (cols < c )  cols = c; 
-	}
-	
-    // var borderWidth = 2 ;
-    // var w = getRootCellWidth();
-    // var h = getRootCellHeight();
-    // var w = document.documentElement.clientWidth;
-    // var h  = document.documentElement.clientHeight;
-    
+	  
     var w = geometry.getViewportWidth();
     var h  = geometry.getViewportHeight();
     
@@ -400,6 +378,7 @@ function ResizeTable()
 	var tdWidth = (tblWidth - (cols +1) * borderWidth*2)/(cols +1)  ;              console.log(tdWidth);
 	var tdHeight = (tblHeight -  (rows +1) * borderWidth*2)/(rows+1)  ;         console.log(tdHeight);
 	
+    var tds =tbl.getElementsByTagName('td');
 	for (i = 0; i < tds.length; i++) 
 	{
 		var td = tds[i];
