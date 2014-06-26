@@ -383,8 +383,8 @@ function ResizeTable()
 	{
 		var td = tds[i];
 		var tid = tds[i].id;
-		td.style.width = tdWidth * td.colSpan +"px" ;
-		td.style.height = tdHeight * td.rowSpan +"px";  
+		td.style.width = (tdWidth * td.colSpan ) + ( td.colSpan-1) * 2 * borderWidth +"px" ;
+		td.style.height = (tdHeight * td.rowSpan ) + ( td.rowSpan-1) * 2 * borderWidth + "px";  
         console.log("tid=" + tid);
         console.log(td.style.width);
         console.log(td.style.height);
@@ -394,8 +394,8 @@ function ResizeTable()
 		// div.style.padding="2px";
 		// div.style.marginTop = "0px"; 
 		// div.style.marginBottom = "0px";
-		div.style.maxWidth = tdWidth * td.colSpan - 5 +"px" ;
-		div.style.maxHeight = tdHeight * td.rowSpan -5  +"px";
+		div.style.maxWidth = td.style.width - 5 +"px" ;
+		div.style.maxHeight = td.style.height  -5  +"px";
         div.onclick = function(){ selectacell(window.event.clientX, window.event.clientY);};
 	}
 		
