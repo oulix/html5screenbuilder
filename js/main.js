@@ -312,7 +312,7 @@ function SaveMe()
     var html = document.documentElement.outerHTML;
     html = doctype +  "\n" + html;
     console.log( html );
-    // WriteTextFile(_rootPath + "../a.html", html);
+    // WriteTextFile(_rootPath + "./a.html", html);
     return html;
 }
 
@@ -383,20 +383,27 @@ function ResizeTable()
 	{
 		var td = tds[i];
 		var tid = tds[i].id;
-		td.style.width = (tdWidth * td.colSpan ) + ( td.colSpan-1) * 2 * borderWidth +"px" ;
-		td.style.height = (tdHeight * td.rowSpan ) + ( td.rowSpan-1) * 2 * borderWidth + "px";  
+		var width = (tdWidth * td.colSpan ) + ( td.colSpan-1) * 2 * borderWidth ;
+		var height = (tdHeight * td.rowSpan ) + ( td.rowSpan-1) * 2 * borderWidth ;
+
+        td.style.width = width +"px" ;
+        td.style.height = height +"px" ;
+        
         console.log("tid=" + tid);
-        console.log(td.style.width);
-        console.log(td.style.height);
-		
-		var div = $("#"+tid).children("DIV")[0];
+        console.log(width);
+        console.log(height);
+         
+        divid = tid.replace(/u/g, 'v');
+        var div = $("#"+divid);
 		// div.style.overflow="hidden";
 		// div.style.padding="2px";
 		// div.style.marginTop = "0px"; 
 		// div.style.marginBottom = "0px";
-		div.style.maxWidth = td.style.width - 5 +"px" ;
-		div.style.maxHeight = td.style.height  -5  +"px";
-        div.onclick = function(){ selectacell(window.event.clientX, window.event.clientY);};
+        div.css ( "max-width" , (width - 2 )  +"px" ) ;
+		div.css ( "max-height", (height - 2)  +"px" );
+        
+        var divelem = $("#"+tid).children("DIV")[0];  console.log("div:"+divelem);
+        divelem.onclick = function(){ selectacell(window.event.clientX, window.event.clientY);};
 	}
 		
 }
@@ -541,7 +548,7 @@ function fillcontenttodiv(div, content)
 
 function istdempty(td)
 {
-    var divid = td.replace('u','v');
+    var divid = td.replace(/u/g,'v');
     var p = $("#"+divid).children("P")[0];
     if(typeof(p) !=  'undefined')
         return p.innerHTML == '';
@@ -551,7 +558,7 @@ function istdempty(td)
 
 function gettdcontent(td)
 {
-    var divid = td.replace('u','v');
+    var divid = td.replace(/u/g,'v');
     return $("#"+divid).html();
 /*    var p = $("#"+divid).children("P")[0];
     if(typeof(p) != 'undefined' )

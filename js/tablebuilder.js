@@ -658,11 +658,13 @@ function CreateDIVforTD(td)
 	div.style.overflow="hidden";
 	div.style.padding="2px";
 	div.style.marginTop = "-5px"; 
+	div.style.maxWidth = "10px";
+	div.style.maxHeight = "10px";
 	// div.style.marginBottom = "2px";
 	// div.style.marginLeft = "2px"; 
 	// div.style.marginRight = "2px"; 
 	div.style.display = "none";
-	div.id = td.id.replace('u', 'v');
+	div.id = td.id.replace(/u/g, 'v');
 	td.appendChild(div);	
 }
 
