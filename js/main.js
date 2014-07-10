@@ -399,8 +399,13 @@ function ResizeTable()
 		// div.style.padding="2px";
 		// div.style.marginTop = "0px"; 
 		// div.style.marginBottom = "0px";
-        div.css ( "max-width" , (width - 2 )  +"px" ) ;
-		div.css ( "max-height", (height - 2)  +"px" );
+        div.css( "max-width" , (width - width/20*2 )  +"px" ) ;
+		div.css( "max-height", (height - height/20*2)  +"px" );
+        div.css( "padding", "0");
+        div.css( "margin-left",  width/20  +"px");
+        div.css( "margin-right",  width/20  +"px");
+        div.css( "margin-top",      height /20  +"px");
+        div.css( "margin-bottom",  height/20 +"px");
         
         var divelem = $("#"+tid).children("DIV")[0];  console.log("div:"+divelem);
         divelem.onclick = function(){ selectacell(window.event.clientX, window.event.clientY);};
