@@ -59,7 +59,7 @@
                });
     }
     if (!shadow) {
-      shadow = $('<div></div>')
+      shadow = $('<div id=\'jqShadow\'></div>')
                  .css({backgroundColor:'#000',position:'absolute',opacity:0.2,zIndex:499})
                  .appendTo('body')
                  .hide();

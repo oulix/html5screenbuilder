@@ -312,7 +312,11 @@ function SaveMe()
     var html = document.documentElement.outerHTML;
     html = doctype +  "\n" + html;
     console.log( html );
-    // WriteTextFile(_rootPath + "./a.html", html);
+
+    html = html.replace(document.getElementById("jqContextMenu").outerHTML, ""); 
+    html = html.replace(document.getElementById("jqShadow").outerHTML, "");
+    
+    // WriteTextFile(_rootPath + "../a.html", html);
     return html;
 }
 
